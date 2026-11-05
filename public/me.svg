@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bgGlow" cx="50%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#333333" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#141414" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#080808" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2a2a2a"/>
+      <stop offset="50%" stop-color="#151515"/>
+      <stop offset="100%" stop-color="#0a0a0a"/>
+    </linearGradient>
+    <linearGradient id="jacketGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#181818"/>
+      <stop offset="50%" stop-color="#242424"/>
+      <stop offset="100%" stop-color="#181818"/>
+    </linearGradient>
+    <linearGradient id="skinGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3a3a3a"/>
+      <stop offset="100%" stop-color="#1a1a1a"/>
+    </linearGradient>
+    <linearGradient id="rimLight" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.4"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.35"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Ambient background circle -->
+  <rect width="800" height="1000" fill="transparent"/>
+  <ellipse cx="400" cy="380" rx="340" ry="340" fill="url(#bgGlow)"/>
+
+  <!-- Stylized Torso / Jacket -->
+  <path d="M120 1000 C150 780 230 650 310 600 C340 580 370 575 400 575 C430 575 460 580 490 600 C570 650 650 780 680 1000 Z" fill="url(#jacketGrad)"/>
+  
+  <!-- Jacket Collar Details -->
+  <path d="M310 600 L370 750 L400 770 L430 750 L490 600" stroke="#383838" stroke-width="2" fill="none"/>
+  <path d="M370 750 L400 900 L430 750" fill="#111111"/>
+  
+  <!-- Neck -->
+  <path d="M365 470 C365 540 375 580 400 580 C425 580 435 540 435 470 Z" fill="url(#skinGrad)"/>
+
+  <!-- Head / Face Silhouette -->
+  <ellipse cx="400" cy="360" rx="105" ry="135" fill="url(#skinGrad)"/>
+  
+  <!-- Hair & Clean Modern Crop -->
+  <path d="M295 340 C290 250 340 185 400 185 C460 185 510 250 505 340 C490 280 440 240 400 240 C360 240 310 280 295 340 Z" fill="#111111"/>
+  <path d="M290 310 C310 220 360 190 400 190 C445 190 490 220 510 310 C480 230 430 205 400 205 C370 205 320 230 290 310 Z" fill="#222222"/>
+
+  <!-- Rim Lighting Edge Silhouette for Cinematic Aesthetic -->
+  <path d="M295 360 C295 240 340 190 400 190 C460 190 505 240 505 360 C505 450 450 495 400 495 C350 495 295 450 295 360 Z" stroke="url(#rimLight)" stroke-width="3" fill="none"/>
+
+  <!-- Glasses / Minimalist Frame Accent -->
+  <rect x="330" y="325" width="55" height="36" rx="8" stroke="#555555" stroke-width="2.5" fill="none"/>
+  <rect x="415" y="325" width="55" height="36" rx="8" stroke="#555555" stroke-width="2.5" fill="none"/>
+  <line x1="385" y1="340" x2="415" y2="340" stroke="#555555" stroke-width="2.5"/>
+
+  <!-- Subtle Rim Light Highlights on Shoulders -->
+  <path d="M125 990 C155 785 233 655 310 605" stroke="rgba(255,255,255,0.22)" stroke-width="2" fill="none"/>
+  <path d="M675 990 C645 785 567 655 490 605" stroke="rgba(255,255,255,0.22)" stroke-width="2" fill="none"/>
+</svg>
