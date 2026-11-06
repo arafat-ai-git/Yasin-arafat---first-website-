@@ -641,6 +641,122 @@
         margin-bottom: 22px;
       }
 
+      /* Hero Visitor Counter Badge (Rounded Rectangle) */
+      .hero-visitor-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(14, 14, 14, 0.72);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 8px;
+        padding: 6px 10px;
+        font-size: 12px;
+        font-weight: 500;
+        color: #ffffff;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        user-select: none;
+        line-height: 1;
+        white-space: nowrap;
+        box-sizing: border-box;
+      }
+
+      .visitor-label {
+        font-family: inherit;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #ffffff;
+        line-height: 1;
+      }
+
+      .visitor-eye-icon {
+        width: 13px;
+        height: 13px;
+        color: #22c55e;
+        stroke: #22c55e;
+        flex-shrink: 0;
+        display: inline-block;
+        animation: eyeGlowPulse 2s ease-in-out infinite;
+      }
+
+      .visitor-count-num {
+        font-weight: 700;
+        color: #ffffff;
+        line-height: 1;
+      }
+
+      @keyframes eyeGlowPulse {
+        0%, 100% {
+          filter: drop-shadow(0 0 2px rgba(34, 197, 94, 0.45));
+          opacity: 0.9;
+        }
+        50% {
+          filter: drop-shadow(0 0 6px rgba(34, 197, 94, 0.95)) drop-shadow(0 0 10px rgba(34, 197, 94, 0.35));
+          opacity: 1;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .visitor-eye-icon {
+          animation: none !important;
+          filter: drop-shadow(0 0 3px rgba(34, 197, 94, 0.6));
+        }
+      }
+
+      @media (min-width: 700px) {
+        .hero-visitor-badge-row {
+          display: contents;
+        }
+        .hero-visitor-badge {
+          position: absolute;
+          top: 11px;
+          right: 48px;
+          font-size: 12px;
+          z-index: 20;
+          margin: 0;
+        }
+      }
+
+      @media (min-width: 700px) and (max-width: 767px) {
+        .hero-visitor-badge {
+          right: 20px;
+        }
+      }
+
+      @media (max-width: 699px) {
+        .hero-visitor-badge-row {
+          display: flex;
+          justify-content: flex-start;
+          width: 100%;
+          padding: 0 16px;
+          margin-top: 12px;
+          box-sizing: border-box;
+        }
+        .hero-visitor-badge {
+          font-size: 10px;
+          padding: 4px 8px;
+          border-radius: 6px;
+          gap: 6px;
+          position: relative;
+          top: auto;
+          right: auto;
+          margin: 0;
+        }
+        .hero-visitor-badge .visitor-label {
+          font-size: 10px;
+          letter-spacing: 0.08em;
+        }
+        .hero-visitor-badge .visitor-eye-icon {
+          width: 11px;
+          height: 11px;
+        }
+        .hero-visitor-badge .visitor-count-num {
+          font-size: 10px;
+          font-weight: 700;
+        }
+      }
+
       .dot-pulse-live {
         width: 8px;
         height: 8px;
@@ -1129,22 +1245,25 @@
       }
 
       /* ========================================================
-         LIGHTBOX MODAL
+         LIGHTBOX MODAL (YouTube-Like Player & Star Rating)
          ======================================================== */
       .lightbox-backdrop {
         position: fixed;
         inset: 0;
-        background: rgba(0, 0, 0, 0.88);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
         z-index: 1000;
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 40px;
+        padding: 52px 16px 28px;
+        box-sizing: border-box;
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.25s ease;
+        overflow-y: auto;
+        overflow-x: hidden;
       }
 
       .lightbox-backdrop.active {
@@ -1155,70 +1274,87 @@
       .lightbox-container {
         position: relative;
         width: 100%;
-        max-width: 720px;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        align-items: stretch;
+        margin: auto;
       }
 
+      /* Long video (16:9): full width of popup min(92vw, 960px), max-height 80vh, rounded corners 14px */
       .lightbox-container.lightbox-mode-video {
-        width: 90vw;
-        max-width: 720px;
+        width: min(92vw, 960px, calc(80vh * 16 / 9));
+        max-width: 100%;
       }
 
       .lightbox-container.lightbox-mode-video .lightbox-content-slot {
         width: 100%;
         aspect-ratio: 16 / 9;
-        height: auto;
+        max-height: 80vh;
+        border-radius: 14px;
+        overflow: hidden;
       }
 
+      /* Short (vertical 9:16): height min(78vh, 680px), aspect-ratio 9 / 16, max-width 92vw, rounded corners 14px, centered */
       .lightbox-container.lightbox-mode-short {
-        width: auto;
-        max-width: 90vw;
+        width: min(92vw, calc(min(78vh, 680px) * 9 / 16));
+        max-width: 100%;
+        align-items: center;
       }
 
       .lightbox-container.lightbox-mode-short .lightbox-content-slot {
-        height: 75vh;
-        max-height: 75vh;
+        height: min(78vh, 680px);
         aspect-ratio: 9 / 16;
+        max-width: 92vw;
+        border-radius: 14px;
+        overflow: hidden;
         width: auto;
-        max-width: 90vw;
       }
 
+      .lightbox-container.lightbox-mode-short .lightbox-meta-panel {
+        width: min(92vw, calc(min(78vh, 680px) * 9 / 16));
+        max-width: 100%;
+      }
+
+      /* Close button: round X button at the top-right corner just above the player */
       .lightbox-close-btn {
         position: absolute;
-        top: -48px;
+        top: -42px;
         right: 0;
-        width: 40px;
-        height: 40px;
+        width: 36px;
+        height: 36px;
         border-radius: 50%;
-        background: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.22);
         color: #ffffff;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 22px;
+        font-size: 18px;
         cursor: pointer;
-        transition: background 0.2s ease, transform 0.2s ease;
+        transition: background 0.2s ease, transform 0.2s ease, color 0.2s ease;
+        z-index: 20;
+        padding: 0;
+        line-height: 1;
       }
 
       .lightbox-close-btn:hover {
         background: rgba(255, 255, 255, 0.25);
-        transform: scale(1.05);
+        transform: scale(1.06);
+        color: #ffffff;
       }
 
+      /* Player slot: fits tightly around video, no extra dark frames or borders */
       .lightbox-content-slot {
         width: 100%;
-        aspect-ratio: 16 / 9;
         background: #000000;
-        border-radius: 12px;
+        border-radius: 14px;
         overflow: hidden;
-        border: 1px solid rgba(255, 255, 255, 0.15);
         display: flex;
         align-items: center;
         justify-content: center;
+        position: relative;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+        border: none;
       }
 
       .lightbox-youtube-iframe {
@@ -1226,20 +1362,118 @@
         height: 100%;
         border: 0;
         display: block;
+        border-radius: 14px;
       }
 
       .lightbox-video-player {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        border-radius: 14px;
       }
 
-      .lightbox-title-caption {
-        margin-top: 16px;
+      /* Meta panel below player */
+      .lightbox-meta-panel {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        margin-top: 12px;
+        box-sizing: border-box;
+      }
+
+      /* Video Title: white, 16px, left-aligned, max 2 lines */
+      .lightbox-video-title {
         font-family: 'Archivo', sans-serif;
-        font-size: 18px;
+        font-size: 16px;
+        font-weight: 600;
         color: #ffffff;
-        text-align: center;
+        text-align: left;
+        line-height: 1.35;
+        margin: 0 0 6px 0;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-break: break-word;
+      }
+
+      /* Rating Row: stars, average/count stats, feedback */
+      .lightbox-rating-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        min-height: 28px;
+      }
+
+      .lightbox-stars-group {
+        display: inline-flex;
+        align-items: center;
+        gap: 2px;
+      }
+
+      .star-btn {
+        background: transparent;
+        border: none;
+        padding: 3px;
+        margin: 0;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+        touch-action: manipulation;
+      }
+
+      .star-btn:hover,
+      .star-btn:focus-visible {
+        transform: scale(1.18);
+        outline: none;
+      }
+
+      .star-btn .star-icon {
+        width: 20px;
+        height: 20px;
+        fill: transparent;
+        stroke: #737373;
+        stroke-width: 1.8;
+        stroke-linejoin: round;
+        stroke-linecap: round;
+        transition: fill 0.18s ease, stroke 0.18s ease, filter 0.18s ease;
+      }
+
+      /* Selected / Hovered Stars: Filled GREEN (#22c55e) with soft green glow */
+      .star-btn.is-active .star-icon,
+      .star-btn.is-hovered .star-icon {
+        fill: #22c55e !important;
+        stroke: #22c55e !important;
+        filter: drop-shadow(0 0 6px rgba(34, 197, 94, 0.7)) !important;
+      }
+
+      .lightbox-rating-stats {
+        font-size: 13px;
+        color: #8c8c8c;
+        font-weight: 500;
+        line-height: 1;
+      }
+
+      .lightbox-rating-feedback {
+        font-size: 13px;
+        font-weight: 600;
+        color: #22c55e;
+        line-height: 1;
+        opacity: 0;
+        transform: translateY(2px);
+        transition: opacity 0.2s ease, transform 0.2s ease;
+        pointer-events: none;
+      }
+
+      .lightbox-rating-feedback.visible {
+        opacity: 1;
+        transform: translateY(0);
       }
 
       /* ========================================================
@@ -2492,25 +2726,43 @@
         }
 
         .lightbox-backdrop {
-          padding: 24px 16px;
+          padding: 44px 12px 20px !important;
+          box-sizing: border-box !important;
         }
 
         .lightbox-close-btn {
-          top: -42px;
-          right: 0;
-          width: 36px;
-          height: 36px;
-          font-size: 18px;
+          top: -40px !important;
+          right: 0 !important;
+          width: 34px !important;
+          height: 34px !important;
+          font-size: 16px !important;
         }
 
         .lightbox-container.lightbox-mode-video {
-          width: 90vw;
-          max-width: 100%;
+          width: 100% !important;
+          max-width: 100% !important;
+        }
+
+        .lightbox-container.lightbox-mode-video .lightbox-content-slot {
+          width: 100% !important;
+          aspect-ratio: 16 / 9 !important;
+          max-height: 72vh !important;
+          border-radius: 12px !important;
+        }
+
+        .lightbox-container.lightbox-mode-short {
+          width: min(92vw, calc(72vh * 9 / 16)) !important;
         }
 
         .lightbox-container.lightbox-mode-short .lightbox-content-slot {
-          height: 75vh;
-          max-width: 88vw;
+          height: 72vh !important;
+          max-height: 72vh !important;
+          aspect-ratio: 9 / 16 !important;
+          border-radius: 12px !important;
+        }
+
+        .lightbox-container.lightbox-mode-short .lightbox-meta-panel {
+          width: 100% !important;
         }
 
         /* 7. WhatsApp Card on Phones */
@@ -2902,8 +3154,11 @@
         }
       }
 
-      /* Tablet specifics (700px to 1099px): heading ~44px, total gap ~64px */
+      /* ========================================================
+         RESPONSIVE TYPOGRAPHY & LAYOUT SAFETY: TABLET (700px - 1099px)
+         ======================================================== */
       @media (min-width: 700px) and (max-width: 1099px) {
+        /* Section spacing */
         #services {
           padding-bottom: 32px !important;
         }
@@ -2911,14 +3166,279 @@
           padding-top: 32px !important;
           padding-bottom: 24px !important;
         }
+
+        /* Top navigation: links 14px, logo 14px */
+        .top-nav-bar {
+          padding: 0 24px !important;
+          height: 76px !important;
+          box-sizing: border-box !important;
+        }
+        .top-nav-bar .nav-brand-title {
+          font-size: 14px !important;
+        }
+        .top-nav-bar .nav-pill-link {
+          font-size: 14px !important;
+          padding: 0 12px !important;
+        }
+        .top-nav-bar .nav-hire-btn {
+          font-size: 14px !important;
+          padding: 0 18px !important;
+        }
+
+        /* Hero: layout safety & dimensions */
+        .hero-shell {
+          padding: 0 24px !important;
+          box-sizing: border-box !important;
+          height: auto !important;
+          min-height: calc(100svh - 76px) !important;
+        }
+        .hero-3col-layout {
+          display: grid !important;
+          grid-template-columns: 300px 1fr 240px !important;
+          gap: 0 !important;
+          align-items: center !important;
+          width: 100% !important;
+          box-sizing: border-box !important;
+          height: auto !important;
+          min-height: calc(100svh - 76px) !important;
+        }
+        .hero-left-column {
+          width: 300px !important;
+          max-width: 300px !important;
+          grid-column: 1 !important;
+          z-index: 10 !important;
+          align-items: flex-start !important;
+        }
+        .hero-right-column {
+          width: 240px !important;
+          max-width: 240px !important;
+          grid-column: 3 !important;
+          z-index: 10 !important;
+          align-items: flex-end !important;
+        }
+        .hero-center-portrait {
+          grid-column: 2 !important;
+          position: relative !important;
+          left: auto !important;
+          right: auto !important;
+          transform: none !important;
+          width: 100% !important;
+          max-width: 100% !important;
+          margin: 0 auto !important;
+          z-index: 5 !important;
+          height: auto !important;
+        }
+        .hero-center-portrait img {
+          width: 100% !important;
+          height: auto !important;
+          max-height: calc(100svh - 130px) !important;
+          object-fit: contain !important;
+          object-position: center top !important;
+          display: block !important;
+        }
+
+        /* Hero typography */
+        .hero-intro-copy {
+          font-size: 16px !important;
+          line-height: 1.55 !important;
+        }
+        .hero-creator-badge {
+          font-size: 12px !important;
+        }
+        .hero-stats-panel {
+          width: 100% !important;
+          max-width: 300px !important;
+          height: auto !important;
+          min-height: auto !important;
+          box-sizing: border-box !important;
+        }
+        .hero-stats-panel .stat-val {
+          font-size: 22px !important;
+        }
+        .hero-stats-panel .stat-desc {
+          font-size: 11px !important;
+        }
+
+        /* Core Capabilities box: title 11px, items 14px */
+        .services-mini-card {
+          width: 240px !important;
+          max-width: 240px !important;
+          padding: 18px 16px !important;
+          height: auto !important;
+          min-height: auto !important;
+          box-sizing: border-box !important;
+        }
+        .mini-card-head {
+          font-size: 11px !important;
+        }
+        .mini-service-item {
+          font-size: 14px !important;
+        }
+        .mini-service-item .num {
+          font-size: 11px !important;
+        }
+
+        /* Hero badges: Available 13px, Visitor 12px */
+        .hero-avail-badge {
+          font-size: 13px !important;
+          height: auto !important;
+        }
+        .hero-visitor-badge {
+          font-size: 12px !important;
+          position: absolute !important;
+          top: 16px !important;
+          right: 24px !important;
+          z-index: 20 !important;
+          margin: 0 !important;
+          height: auto !important;
+        }
+        .hero-visitor-badge .visitor-label {
+          font-size: 12px !important;
+        }
+        .hero-visitor-badge .visitor-count-num {
+          font-size: 12px !important;
+        }
+
+        /* Section headings: 40px */
+        .section-title-large,
+        #work .section-title-large,
+        #services .section-title-large,
         #contact .section-title-large {
-          font-size: 44px !important;
+          font-size: 40px !important;
           line-height: 1.1 !important;
+          letter-spacing: -0.03em !important;
+        }
+
+        /* Section intro paragraphs: 17px, line-height 1.6 */
+        .section-subtitle-text,
+        #work .section-subtitle-text,
+        #services .section-subtitle-text {
+          font-size: 17px !important;
+          line-height: 1.6 !important;
+        }
+
+        /* Work stats: numbers 32px, labels 12px */
+        .work-kpis-strip {
+          height: auto !important;
+          min-height: auto !important;
+        }
+        .work-kpi-num,
+        #work .work-kpi-num {
+          font-size: 32px !important;
+        }
+        .work-kpi-label,
+        #work .work-kpi-label {
+          font-size: 12px !important;
+        }
+
+        /* Work filters & cards: filter 14px, category 12px, title 17px, watch 12px */
+        .work-filter-pill,
+        #work .work-filter-pill {
+          font-size: 14px !important;
+          height: auto !important;
+          min-height: auto !important;
+        }
+        .project-tag-pill,
+        .project-type-indicator {
+          font-size: 12px !important;
+        }
+        .project-card-title {
+          font-size: 17px !important;
+        }
+        .watch-youtube-link {
+          font-size: 12px !important;
+        }
+        .projects-grid-container {
+          align-items: stretch !important;
+        }
+        .project-item-card {
+          height: 100% !important;
+          min-height: auto !important;
+          display: flex !important;
+          flex-direction: column !important;
+          justify-content: space-between !important;
+        }
+        .project-info-box {
+          flex: 1 1 auto !important;
+          display: flex !important;
+          flex-direction: column !important;
+          justify-content: space-between !important;
+        }
+
+        /* Services cards: number 13px, title 20px, desc 15px, tags 12px */
+        .service-card-num {
+          font-size: 13px !important;
+        }
+        .service-card-title {
+          font-size: 20px !important;
+        }
+        .service-card-desc {
+          font-size: 15px !important;
+        }
+        .service-card-tag {
+          font-size: 12px !important;
+        }
+        .service-card-tags {
+          flex-wrap: wrap !important;
+        }
+        .services-grid-main {
+          align-items: stretch !important;
+        }
+        .service-card-item {
+          height: 100% !important;
+          min-height: auto !important;
+          display: flex !important;
+          flex-direction: column !important;
+          justify-content: space-between !important;
+        }
+
+        /* Contact: paragraph 16px, WhatsApp 26px, labels 14px, inputs 16px, pills 14px, buttons 15px */
+        #contact .contact-prompt-copy {
+          font-size: 16px !important;
+          line-height: 1.6 !important;
+        }
+        #contact .whatsapp-value-display {
+          font-size: 26px !important;
+        }
+        #contact .field-block label,
+        #contact .whatsapp-card-eyebrow {
+          font-size: 14px !important;
+        }
+        #contact .input-text,
+        #contact .input-area {
+          font-size: 16px !important;
+        }
+        #contact .pills-flow {
+          flex-wrap: wrap !important;
+        }
+        #contact .filter-pill {
+          font-size: 14px !important;
+          height: auto !important;
+          min-height: 38px !important;
+        }
+        #contact .btn-submit-inquiry,
+        #contact .copy-btn-action,
+        #contact .whatsapp-chat-link {
+          font-size: 15px !important;
+        }
+
+        /* Footer text: 13px */
+        .site-footer,
+        .footer-row-main,
+        .footer-privacy-link,
+        .footer-author,
+        .footer-row-sub,
+        .footer-motto,
+        .dock-label-prefix {
+          font-size: 13px !important;
         }
       }
 
-      /* Laptop and desktop specifics (1100px and above): heading ~56px, total gap ~80px */
+      /* ========================================================
+         RESPONSIVE TYPOGRAPHY & LAYOUT SAFETY: LAPTOP & DESKTOP (1100px and above)
+         ======================================================== */
       @media (min-width: 1100px) {
+        /* Section spacing */
         #services {
           padding-bottom: 40px !important;
         }
@@ -2926,9 +3446,272 @@
           padding-top: 40px !important;
           padding-bottom: 24px !important;
         }
+
+        /* Top navigation: links 15px, logo 15px */
+        .top-nav-bar {
+          padding: 0 48px !important;
+          height: 76px !important;
+          box-sizing: border-box !important;
+        }
+        .top-nav-bar .nav-brand-title {
+          font-size: 15px !important;
+        }
+        .top-nav-bar .nav-pill-link {
+          font-size: 15px !important;
+          padding: 0 14px !important;
+        }
+        .top-nav-bar .nav-hire-btn {
+          font-size: 14px !important;
+          padding: 0 22px !important;
+        }
+
+        /* Hero: layout safety & dimensions */
+        .hero-shell {
+          padding: 0 48px !important;
+          box-sizing: border-box !important;
+          max-width: 1560px !important;
+          height: auto !important;
+          min-height: calc(100svh - 76px) !important;
+        }
+        .hero-3col-layout {
+          display: grid !important;
+          grid-template-columns: 360px 1fr 280px !important;
+          gap: 0 !important;
+          align-items: center !important;
+          width: 100% !important;
+          box-sizing: border-box !important;
+          height: auto !important;
+          min-height: calc(100svh - 76px) !important;
+        }
+        .hero-left-column {
+          width: 360px !important;
+          max-width: 360px !important;
+          grid-column: 1 !important;
+          z-index: 10 !important;
+          align-items: flex-start !important;
+        }
+        .hero-right-column {
+          width: 280px !important;
+          max-width: 280px !important;
+          grid-column: 3 !important;
+          z-index: 10 !important;
+          align-items: flex-end !important;
+        }
+        .hero-center-portrait {
+          grid-column: 2 !important;
+          position: relative !important;
+          left: auto !important;
+          right: auto !important;
+          transform: none !important;
+          width: 100% !important;
+          max-width: 100% !important;
+          margin: 0 auto !important;
+          z-index: 5 !important;
+          height: auto !important;
+        }
+        .hero-center-portrait img {
+          width: 100% !important;
+          height: auto !important;
+          max-height: calc(100svh - 130px) !important;
+          object-fit: contain !important;
+          object-position: center top !important;
+          display: block !important;
+        }
+
+        /* Hero typography */
+        .hero-intro-copy {
+          font-size: 18px !important;
+          line-height: 1.55 !important;
+        }
+        .hero-creator-badge {
+          font-size: 13px !important;
+        }
+        .hero-stats-panel {
+          width: 100% !important;
+          max-width: 360px !important;
+          height: auto !important;
+          min-height: auto !important;
+          box-sizing: border-box !important;
+        }
+        .hero-stats-panel .stat-val {
+          font-size: 26px !important;
+        }
+        .hero-stats-panel .stat-desc {
+          font-size: 12px !important;
+        }
+
+        /* Core Capabilities box: title 12px, items 15px */
+        .services-mini-card {
+          width: 280px !important;
+          max-width: 280px !important;
+          padding: 22px !important;
+          height: auto !important;
+          min-height: auto !important;
+          box-sizing: border-box !important;
+        }
+        .mini-card-head {
+          font-size: 12px !important;
+        }
+        .mini-service-item {
+          font-size: 15px !important;
+        }
+        .mini-service-item .num {
+          font-size: 12px !important;
+        }
+
+        /* Hero badges: Available 14px, Visitor 13px */
+        .hero-avail-badge {
+          font-size: 14px !important;
+          height: auto !important;
+        }
+        .hero-visitor-badge {
+          font-size: 13px !important;
+          position: absolute !important;
+          top: 16px !important;
+          right: 48px !important;
+          z-index: 20 !important;
+          margin: 0 !important;
+          height: auto !important;
+        }
+        .hero-visitor-badge .visitor-label {
+          font-size: 13px !important;
+        }
+        .hero-visitor-badge .visitor-count-num {
+          font-size: 13px !important;
+        }
+
+        /* Section headings: 52px */
+        .section-title-large,
+        #work .section-title-large,
+        #services .section-title-large,
         #contact .section-title-large {
-          font-size: 56px !important;
-          line-height: 1.1 !important;
+          font-size: 52px !important;
+          line-height: 1.05 !important;
+          letter-spacing: -0.03em !important;
+        }
+
+        /* Section intro paragraphs: 18px, line-height 1.6 */
+        .section-subtitle-text,
+        #work .section-subtitle-text,
+        #services .section-subtitle-text {
+          font-size: 18px !important;
+          line-height: 1.6 !important;
+        }
+
+        /* Work stats: numbers 38px, labels 13px */
+        .work-kpis-strip {
+          height: auto !important;
+          min-height: auto !important;
+        }
+        .work-kpi-num,
+        #work .work-kpi-num {
+          font-size: 38px !important;
+        }
+        .work-kpi-label,
+        #work .work-kpi-label {
+          font-size: 13px !important;
+        }
+
+        /* Work filters & cards: filter 15px, category 12.5px, title 19px, watch 12.5px */
+        .work-filter-pill,
+        #work .work-filter-pill {
+          font-size: 15px !important;
+          height: auto !important;
+          min-height: auto !important;
+        }
+        .project-tag-pill,
+        .project-type-indicator {
+          font-size: 12.5px !important;
+        }
+        .project-card-title {
+          font-size: 19px !important;
+        }
+        .watch-youtube-link {
+          font-size: 12.5px !important;
+        }
+        .projects-grid-container {
+          align-items: stretch !important;
+        }
+        .project-item-card {
+          height: 100% !important;
+          min-height: auto !important;
+          display: flex !important;
+          flex-direction: column !important;
+          justify-content: space-between !important;
+        }
+        .project-info-box {
+          flex: 1 1 auto !important;
+          display: flex !important;
+          flex-direction: column !important;
+          justify-content: space-between !important;
+        }
+
+        /* Services cards: number 14px, title 22px, desc 16px, tags 13px */
+        .service-card-num {
+          font-size: 14px !important;
+        }
+        .service-card-title {
+          font-size: 22px !important;
+        }
+        .service-card-desc {
+          font-size: 16px !important;
+        }
+        .service-card-tag {
+          font-size: 13px !important;
+        }
+        .service-card-tags {
+          flex-wrap: wrap !important;
+        }
+        .services-grid-main {
+          align-items: stretch !important;
+        }
+        .service-card-item {
+          height: 100% !important;
+          min-height: auto !important;
+          display: flex !important;
+          flex-direction: column !important;
+          justify-content: space-between !important;
+        }
+
+        /* Contact: paragraph 17px, WhatsApp 30px, labels 15px, inputs 16px, pills 15px, buttons 16px */
+        #contact .contact-prompt-copy {
+          font-size: 17px !important;
+          line-height: 1.6 !important;
+        }
+        #contact .whatsapp-value-display {
+          font-size: 30px !important;
+        }
+        #contact .field-block label,
+        #contact .whatsapp-card-eyebrow {
+          font-size: 15px !important;
+        }
+        #contact .input-text,
+        #contact .input-area {
+          font-size: 16px !important;
+        }
+        #contact .pills-flow {
+          flex-wrap: wrap !important;
+        }
+        #contact .filter-pill {
+          font-size: 15px !important;
+          height: auto !important;
+          min-height: 40px !important;
+        }
+        #contact .btn-submit-inquiry,
+        #contact .copy-btn-action,
+        #contact .whatsapp-chat-link {
+          font-size: 16px !important;
+        }
+
+        /* Footer text: 14px */
+        .site-footer,
+        .footer-row-main,
+        .footer-privacy-link,
+        .footer-author,
+        .footer-row-sub,
+        .footer-motto,
+        .dock-label-prefix {
+          font-size: 14px !important;
         }
       }
 
@@ -3354,7 +4137,7 @@
             <!-- Stats Card -->
             <div class="hero-stats-panel">
               <div class="stat-block">
-                <div class="stat-val counter" data-target="20" data-suffix="+">0+</div>
+                <div class="stat-val counter" id="heroProjectsCounter" data-target="20" data-suffix="+">0+</div>
                 <div class="stat-desc">Projects</div>
               </div>
               <div class="stat-sep"></div>
@@ -3436,6 +4219,18 @@
           </div>
         </div>
 
+        <!-- Visitor Counter Badge -->
+        <div class="hero-visitor-badge-row">
+          <div class="hero-visitor-badge" id="heroVisitorBadge" aria-label="Visitor counter">
+            <span class="visitor-label">VISITORS</span>
+            <svg class="visitor-eye-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+            <span id="visitorCountVal" class="visitor-count-num">...</span>
+          </div>
+        </div>
+
         <a href="#services" class="next-section-link">
           <span>Next: 02 Services</span>
           <span>→</span>
@@ -3480,7 +4275,7 @@
         <!-- Client Counters Strip inside Work -->
         <div class="work-kpis-strip" id="workCountersStrip">
           <div class="work-kpi-item">
-            <div class="work-kpi-num work-counter" data-target="20" data-suffix="+">0+</div>
+            <div class="work-kpi-num work-counter" id="workProjectsCounter" data-target="20" data-suffix="+">0+</div>
             <div class="work-kpi-label">Global Projects Delivered</div>
           </div>
           <div class="work-kpi-item">
@@ -3516,13 +4311,46 @@
     </section>
 
     <!-- ========================================================
-         LIGHTBOX MODAL (Video Player & Graphic Viewer)
+         LIGHTBOX MODAL (YouTube-Like Player & Star Rating)
          ======================================================== -->
     <div class="lightbox-backdrop" id="workLightbox" role="dialog" aria-modal="true" aria-label="Media Preview">
       <div class="lightbox-container" id="lightboxContainer">
         <button class="lightbox-close-btn" id="lightboxCloseBtn" aria-label="Close Preview">✕</button>
         <div class="lightbox-content-slot" id="lightboxContentSlot"></div>
-        <div class="lightbox-title-caption" id="lightboxCaption"></div>
+        <div class="lightbox-meta-panel" id="lightboxMetaPanel">
+          <div class="lightbox-video-title" id="lightboxCaption"></div>
+          <div class="lightbox-rating-row" id="lightboxRatingRow">
+            <div class="lightbox-stars-group" id="lightboxStarsGroup" role="radiogroup" aria-label="Rate this video">
+              <button type="button" class="star-btn" data-star="1" aria-label="Rate 1 star">
+                <svg width="20" height="20" viewBox="0 0 24 24" class="star-icon" aria-hidden="true">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg>
+              </button>
+              <button type="button" class="star-btn" data-star="2" aria-label="Rate 2 stars">
+                <svg width="20" height="20" viewBox="0 0 24 24" class="star-icon" aria-hidden="true">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg>
+              </button>
+              <button type="button" class="star-btn" data-star="3" aria-label="Rate 3 stars">
+                <svg width="20" height="20" viewBox="0 0 24 24" class="star-icon" aria-hidden="true">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg>
+              </button>
+              <button type="button" class="star-btn" data-star="4" aria-label="Rate 4 stars">
+                <svg width="20" height="20" viewBox="0 0 24 24" class="star-icon" aria-hidden="true">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg>
+              </button>
+              <button type="button" class="star-btn" data-star="5" aria-label="Rate 5 stars">
+                <svg width="20" height="20" viewBox="0 0 24 24" class="star-icon" aria-hidden="true">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg>
+              </button>
+            </div>
+            <span class="lightbox-rating-stats" id="lightboxRatingStats"></span>
+            <span class="lightbox-rating-feedback" id="lightboxRatingFeedback" aria-live="polite"></span>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -3990,30 +4818,6 @@
           `
         };
 
-        function openYouTubeModal(videoId, isShort, titleText) {
-          if (!lightbox || !lightboxSlot) return;
-          lightboxSlot.innerHTML = '';
-
-          const container = document.getElementById('lightboxContainer') || (lightbox ? lightbox.querySelector('.lightbox-container') : null);
-          if (container) {
-            container.classList.remove('lightbox-mode-video', 'lightbox-mode-short');
-            container.classList.add(isShort ? 'lightbox-mode-short' : 'lightbox-mode-video');
-          }
-
-          const iframe = document.createElement('iframe');
-          iframe.className = 'lightbox-youtube-iframe';
-          iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
-          iframe.title = titleText || 'YouTube Video';
-          iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen');
-          iframe.setAttribute('allowfullscreen', 'true');
-          iframe.setAttribute('loading', 'lazy');
-
-          lightboxSlot.appendChild(iframe);
-          if (lightboxCaption) lightboxCaption.textContent = titleText || '';
-          lightbox.classList.add('active');
-          document.body.style.overflow = 'hidden';
-        }
-
         function createProjectCard(p) {
           const card = document.createElement('article');
           card.className = 'project-item-card';
@@ -4130,11 +4934,179 @@
           });
         });
 
-        // --- 2. LIGHTBOX HANDLER & SECURE PROJECT LINKS ---
+        // --- 2. LIGHTBOX HANDLER & STAR RATING ---
         const lightbox = document.getElementById('workLightbox');
         const lightboxSlot = document.getElementById('lightboxContentSlot');
         const lightboxCaption = document.getElementById('lightboxCaption');
         const lightboxCloseBtn = document.getElementById('lightboxCloseBtn');
+        const lightboxMetaPanel = document.getElementById('lightboxMetaPanel');
+        const lightboxRatingRow = document.getElementById('lightboxRatingRow');
+        const lightboxStarsGroup = document.getElementById('lightboxStarsGroup');
+        const lightboxRatingStats = document.getElementById('lightboxRatingStats');
+        const lightboxRatingFeedback = document.getElementById('lightboxRatingFeedback');
+        const starButtons = lightboxStarsGroup ? Array.from(lightboxStarsGroup.querySelectorAll('.star-btn')) : [];
+
+        let currentModalVideoId = null;
+        let currentModalUserRating = 0;
+        let feedbackTimeoutId = null;
+
+        function getOrCreateVoterId() {
+          const KEY = 'voter_id';
+          try {
+            let id = localStorage.getItem(KEY);
+            if (id && typeof id === 'string' && id.trim().length > 3) {
+              return id.trim();
+            }
+            if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+              id = crypto.randomUUID();
+            } else {
+              id = 'voter_' + Date.now().toString(36) + '_' + Math.random().toString(36).substring(2, 12);
+            }
+            localStorage.setItem(KEY, id);
+            return id;
+          } catch (e) {
+            return 'voter_anon_' + Date.now().toString(36);
+          }
+        }
+
+        function getSavedUserRating(videoId) {
+          if (!videoId) return 0;
+          try {
+            const raw = localStorage.getItem('rating_' + videoId);
+            const num = parseInt(raw, 10);
+            return (num >= 1 && num <= 5) ? num : 0;
+          } catch (e) {
+            return 0;
+          }
+        }
+
+        function saveUserRating(videoId, rating) {
+          if (!videoId) return;
+          try {
+            localStorage.setItem('rating_' + videoId, String(rating));
+          } catch (e) {}
+        }
+
+        function getSupabaseHeaders() {
+          const headers = { 'Content-Type': 'application/json' };
+          const cleanKey = (typeof SUPABASE_KEY === 'string' ? SUPABASE_KEY : '').trim();
+          if (cleanKey.startsWith('sb_publishable_')) {
+            headers['apikey'] = cleanKey;
+          }
+          return headers;
+        }
+
+        function getSupabaseRpcUrl(rpcName) {
+          const cleanUrl = (typeof SUPABASE_URL === 'string' ? SUPABASE_URL : '').trim().replace(/\/+$/, '');
+          const baseUrl = cleanUrl.endsWith('/rest/v1') ? cleanUrl : `${cleanUrl}/rest/v1`;
+          return `${baseUrl}/rpc/${rpcName}`;
+        }
+
+        function renderStarHighlights(activeUpTo, isHover = false) {
+          starButtons.forEach((btn, idx) => {
+            const starNum = idx + 1;
+            if (isHover) {
+              if (starNum <= activeUpTo) {
+                btn.classList.add('is-hovered');
+              } else {
+                btn.classList.remove('is-hovered');
+              }
+            } else {
+              btn.classList.remove('is-hovered');
+              if (starNum <= activeUpTo) {
+                btn.classList.add('is-active');
+              } else {
+                btn.classList.remove('is-active');
+              }
+            }
+          });
+        }
+
+        function formatRatingText(data) {
+          if (!data || typeof data.votes !== 'number') {
+            return '';
+          }
+          if (data.votes <= 0) {
+            return 'Be the first to rate';
+          }
+          const avg = Number(data.average);
+          const formattedAvg = isNaN(avg) ? '0' : avg.toFixed(1);
+          const countLabel = data.votes === 1 ? '1 rating' : `${data.votes} ratings`;
+          return `${formattedAvg} · ${countLabel}`;
+        }
+
+        async function fetchVideoRating(videoId) {
+          try {
+            const url = getSupabaseRpcUrl('get_video_rating');
+            const res = await fetch(url, {
+              method: 'POST',
+              headers: getSupabaseHeaders(),
+              body: JSON.stringify({ p_video_id: videoId })
+            });
+            if (!res.ok) return null;
+            return await res.json();
+          } catch (e) {
+            return null;
+          }
+        }
+
+        async function submitVideoRating(videoId, rating) {
+          try {
+            const voterId = getOrCreateVoterId();
+            const url = getSupabaseRpcUrl('rate_video');
+            const res = await fetch(url, {
+              method: 'POST',
+              headers: getSupabaseHeaders(),
+              body: JSON.stringify({
+                p_video_id: videoId,
+                p_voter_id: voterId,
+                p_rating: rating
+              })
+            });
+            if (!res.ok) return null;
+            return await res.json();
+          } catch (e) {
+            return null;
+          }
+        }
+
+        function triggerThanksFeedback() {
+          if (!lightboxRatingFeedback) return;
+          lightboxRatingFeedback.textContent = 'Thanks for rating!';
+          lightboxRatingFeedback.classList.add('visible');
+          if (feedbackTimeoutId) clearTimeout(feedbackTimeoutId);
+          feedbackTimeoutId = setTimeout(() => {
+            lightboxRatingFeedback.classList.remove('visible');
+            lightboxRatingFeedback.textContent = '';
+          }, 2000);
+        }
+
+        // Attach star button event listeners (click, mouseenter, mouseleave)
+        starButtons.forEach((btn, idx) => {
+          const starVal = idx + 1;
+          btn.addEventListener('mouseenter', () => {
+            renderStarHighlights(starVal, true);
+          });
+          btn.addEventListener('click', async (e) => {
+            e.stopPropagation();
+            if (!currentModalVideoId) return;
+            currentModalUserRating = starVal;
+            saveUserRating(currentModalVideoId, starVal);
+            renderStarHighlights(starVal, false);
+            triggerThanksFeedback();
+
+            const updatedData = await submitVideoRating(currentModalVideoId, starVal);
+            if (updatedData && lightboxRatingStats && currentModalVideoId) {
+              lightboxRatingStats.textContent = formatRatingText(updatedData);
+            }
+          });
+        });
+
+        if (lightboxStarsGroup) {
+          lightboxStarsGroup.addEventListener('mouseleave', () => {
+            renderStarHighlights(currentModalUserRating, false);
+          });
+        }
 
         function sanitizeExternalUrl(raw) {
           if (!raw || typeof raw !== 'string') return null;
@@ -4163,8 +5135,70 @@
           }
         }
 
+        async function openYouTubeModal(videoId, isShort, titleText) {
+          if (!lightbox || !lightboxSlot) return;
+          currentModalVideoId = videoId;
+          lightboxSlot.innerHTML = '';
+
+          const container = document.getElementById('lightboxContainer') || (lightbox ? lightbox.querySelector('.lightbox-container') : null);
+          if (container) {
+            container.classList.remove('lightbox-mode-video', 'lightbox-mode-short');
+            container.classList.add(isShort ? 'lightbox-mode-short' : 'lightbox-mode-video');
+          }
+
+          const iframe = document.createElement('iframe');
+          iframe.className = 'lightbox-youtube-iframe';
+          iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&playsinline=1&modestbranding=1`;
+          iframe.title = titleText || 'YouTube Video';
+          iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen');
+          iframe.setAttribute('allowfullscreen', 'true');
+          iframe.setAttribute('loading', 'lazy');
+
+          lightboxSlot.appendChild(iframe);
+
+          if (lightboxCaption) {
+            lightboxCaption.textContent = titleText || '';
+          }
+
+          if (lightboxRatingRow) {
+            lightboxRatingRow.style.display = 'flex';
+          }
+          if (lightboxRatingFeedback) {
+            lightboxRatingFeedback.classList.remove('visible');
+            lightboxRatingFeedback.textContent = '';
+          }
+          if (feedbackTimeoutId) {
+            clearTimeout(feedbackTimeoutId);
+            feedbackTimeoutId = null;
+          }
+
+          // Initial star state from localStorage
+          currentModalUserRating = getSavedUserRating(videoId);
+          renderStarHighlights(currentModalUserRating, false);
+
+          if (lightboxRatingStats) {
+            lightboxRatingStats.textContent = '';
+          }
+
+          lightbox.classList.add('active');
+          document.body.style.overflow = 'hidden';
+
+          // Load rating stats from Supabase
+          const ratingData = await fetchVideoRating(videoId);
+          if (currentModalVideoId === videoId && lightboxRatingStats) {
+            if (ratingData) {
+              lightboxRatingStats.textContent = formatRatingText(ratingData);
+            } else {
+              // If failed, show stars without numbers and do not show errors to visitor
+              lightboxRatingStats.textContent = '';
+            }
+          }
+        }
+
         function openLightbox(contentNode, captionText) {
           if (!lightbox || !lightboxSlot) return;
+          currentModalVideoId = null;
+          currentModalUserRating = 0;
           lightboxSlot.textContent = '';
           if (contentNode instanceof Node) {
             lightboxSlot.appendChild(contentNode);
@@ -4176,6 +5210,7 @@
             }
           }
           if (lightboxCaption) lightboxCaption.textContent = captionText || '';
+          if (lightboxRatingRow) lightboxRatingRow.style.display = 'none';
           lightbox.classList.add('active');
           document.body.style.overflow = 'hidden';
         }
@@ -4184,6 +5219,12 @@
           if (!lightbox) return;
           lightbox.classList.remove('active');
           document.body.style.overflow = '';
+          currentModalVideoId = null;
+          currentModalUserRating = 0;
+          if (feedbackTimeoutId) {
+            clearTimeout(feedbackTimeoutId);
+            feedbackTimeoutId = null;
+          }
           if (lightboxSlot) {
             // Remove iframe src to stop video immediately
             lightboxSlot.innerHTML = '';
@@ -4420,7 +5461,7 @@
           });
         }
 
-        // --- 5. COUNTER ANIMATION HELPER ---
+        // --- 5. COUNTER ANIMATION HELPER & DYNAMIC PROJECTS COUNT ---
         function animateCounter(el, target, duration = 1400, suffix = '+', prefix = '') {
           const startTime = performance.now();
           function step(currentTime) {
@@ -4438,13 +5479,75 @@
           requestAnimationFrame(step);
         }
 
+        // Live Projects Count Loader (Single request with 3s fallback to 20)
+        let liveProjectsCount = 20;
+        async function fetchLiveProjectsCount() {
+          const heroCounterEl = document.getElementById('heroProjectsCounter');
+          const workCounterEl = document.getElementById('workProjectsCounter');
+
+          try {
+            const cleanUrl = (typeof SUPABASE_URL === 'string' ? SUPABASE_URL : '').trim().replace(/\/+$/, '');
+            const baseUrl = cleanUrl.endsWith('/rest/v1') ? cleanUrl : `${cleanUrl}/rest/v1`;
+            const cleanKey = (typeof SUPABASE_KEY === 'string' ? SUPABASE_KEY : '').trim();
+
+            const headers = {
+              'Content-Type': 'application/json'
+            };
+
+            if (cleanKey.startsWith('sb_publishable_')) {
+              headers['apikey'] = cleanKey;
+            } else if (cleanKey.startsWith('eyJ')) {
+              headers['apikey'] = cleanKey;
+              headers['Authorization'] = `Bearer ${cleanKey}`;
+            } else if (cleanKey) {
+              headers['apikey'] = cleanKey;
+            }
+
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 3000);
+
+            const response = await fetch(`${baseUrl}/rpc/get_projects_count`, {
+              method: 'POST',
+              headers: headers,
+              body: JSON.stringify({}),
+              signal: controller.signal
+            });
+            clearTimeout(timeoutId);
+
+            if (!response.ok) {
+              throw new Error(`HTTP ${response.status}`);
+            }
+
+            const data = await response.json();
+            const countNum = typeof data === 'number' ? data : (typeof data === 'object' && data !== null && 'count' in data ? Number(data.count) : Number(data));
+
+            if (!isNaN(countNum) && countNum >= 0) {
+              liveProjectsCount = countNum;
+            }
+          } catch (err) {
+            console.warn('Projects count request fallback to 20:', err);
+            liveProjectsCount = 20;
+          } finally {
+            if (heroCounterEl) {
+              heroCounterEl.setAttribute('data-target', String(liveProjectsCount));
+            }
+            if (workCounterEl) {
+              workCounterEl.setAttribute('data-target', String(liveProjectsCount));
+            }
+          }
+          return liveProjectsCount;
+        }
+
+        const liveProjectsCountPromise = fetchLiveProjectsCount();
+
         let workCountersTriggered = false;
         const workSection = document.getElementById('work');
         if (workSection) {
           const workObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
+            entries.forEach(async (entry) => {
               if (entry.isIntersecting && !workCountersTriggered) {
                 workCountersTriggered = true;
+                await liveProjectsCountPromise;
                 const workCounters = Array.from(document.querySelectorAll('.work-counter'));
                 workCounters.forEach(c => {
                   const targetAttr = c.getAttribute('data-target');
@@ -4466,9 +5569,10 @@
         // Hero counters: trigger smoothly when hero stats panel is in view
         const heroStatsPanel = document.querySelector('.hero-stats-panel');
         let heroCountersTriggered = false;
-        function triggerHeroCounters() {
+        async function triggerHeroCounters() {
           if (heroCountersTriggered) return;
           heroCountersTriggered = true;
+          await liveProjectsCountPromise;
           const heroCounters = Array.from(document.querySelectorAll('.hero-stats-panel .counter'));
           heroCounters.forEach(c => {
             const targetAttr = c.getAttribute('data-target');
@@ -4903,6 +6007,76 @@
             }
           });
         }
+
+        // --- 11. VISITOR COUNTER LOGIC (Supabase RPC) ---
+        async function initVisitorCounter() {
+          const badgeEl = document.getElementById('heroVisitorBadge');
+          const countValEl = document.getElementById('visitorCountVal');
+          if (!badgeEl || !countValEl) return;
+
+          try {
+            const cleanUrl = (typeof SUPABASE_URL === 'string' ? SUPABASE_URL : '').trim().replace(/\/+$/, '');
+            const baseUrl = cleanUrl.endsWith('/rest/v1') ? cleanUrl : `${cleanUrl}/rest/v1`;
+            const cleanKey = (typeof SUPABASE_KEY === 'string' ? SUPABASE_KEY : '').trim();
+
+            const headers = {
+              'Content-Type': 'application/json'
+            };
+
+            if (cleanKey.startsWith('sb_publishable_')) {
+              headers['apikey'] = cleanKey;
+            } else if (cleanKey.startsWith('eyJ')) {
+              headers['apikey'] = cleanKey;
+              headers['Authorization'] = `Bearer ${cleanKey}`;
+            } else if (cleanKey) {
+              headers['apikey'] = cleanKey;
+            }
+
+            let isCounted = false;
+            try {
+              isCounted = Boolean(sessionStorage.getItem('visit_counted'));
+            } catch (storageErr) {
+              isCounted = false;
+            }
+
+            const rpcMethod = isCounted ? 'get_visits' : 'increment_visits';
+            const endpoint = `${baseUrl}/rpc/${rpcMethod}`;
+
+            const response = await fetch(endpoint, {
+              method: 'POST',
+              headers: headers,
+              body: JSON.stringify({})
+            });
+
+            if (!response.ok) {
+              throw new Error(`HTTP ${response.status}`);
+            }
+
+            const data = await response.json();
+            const countNum = typeof data === 'number' ? data : (typeof data === 'object' && data !== null && 'count' in data ? Number(data.count) : Number(data));
+
+            if (isNaN(countNum)) {
+              throw new Error('Invalid count');
+            }
+
+            countValEl.textContent = countNum.toLocaleString();
+
+            if (!isCounted) {
+              try {
+                sessionStorage.setItem('visit_counted', '1');
+              } catch (storageErr) {
+                // Ignore storage restrictions
+              }
+            }
+          } catch (err) {
+            console.error('Visitor counter error:', err);
+            badgeEl.style.display = 'none';
+            const row = badgeEl.closest('.hero-visitor-badge-row');
+            if (row) row.style.display = 'none';
+          }
+        }
+
+        initVisitorCounter();
       })();
     </script>
   </body>
