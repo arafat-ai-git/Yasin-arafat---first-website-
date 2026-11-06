@@ -6,7 +6,7 @@
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self' https://commondatastorage.googleapis.com blob:; connect-src 'self' ws: wss:; frame-src 'none'; object-src 'none'; base-uri 'self';"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self' https://commondatastorage.googleapis.com blob:; connect-src 'self' ws: wss:; frame-src https://www.youtube-nocookie.com https://www.youtube.com; object-src 'none'; base-uri 'self';"
     />
     <title>Yasin Arafat — AI Creator & Digital Services</title>
     <meta name="theme-color" content="#080808" />
@@ -952,6 +952,36 @@
         gap: 24px;
       }
 
+      .project-thumb-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .watch-youtube-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 11px;
+        font-weight: 500;
+        color: #d8d8d8;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 9999px;
+        padding: 3px 8px;
+        text-decoration: none;
+        transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      .watch-youtube-link:hover {
+        background: rgba(255, 255, 255, 0.18);
+        border-color: rgba(255, 255, 255, 0.28);
+        color: #ffffff;
+      }
+
       .project-item-card {
         background: var(--card-dark);
         border: 1px solid var(--hairline-light);
@@ -1108,12 +1138,35 @@
       .lightbox-container {
         position: relative;
         width: 100%;
-        max-width: 960px;
-        max-height: 85vh;
+        max-width: 720px;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+      }
+
+      .lightbox-container.lightbox-mode-video {
+        width: 90vw;
+        max-width: 720px;
+      }
+
+      .lightbox-container.lightbox-mode-video .lightbox-content-slot {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        height: auto;
+      }
+
+      .lightbox-container.lightbox-mode-short {
+        width: auto;
+        max-width: 90vw;
+      }
+
+      .lightbox-container.lightbox-mode-short .lightbox-content-slot {
+        height: 75vh;
+        max-height: 75vh;
+        aspect-ratio: 9 / 16;
+        width: auto;
+        max-width: 90vw;
       }
 
       .lightbox-close-btn {
@@ -1149,6 +1202,13 @@
         display: flex;
         align-items: center;
         justify-content: center;
+      }
+
+      .lightbox-youtube-iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        display: block;
       }
 
       .lightbox-video-player {
@@ -1191,7 +1251,8 @@
         margin-bottom: 34px;
       }
 
-      .direct-email-card {
+      .direct-email-card,
+      .direct-whatsapp-card {
         background: #141414;
         border: 1px solid var(--hairline-medium);
         border-radius: 14px;
@@ -1199,7 +1260,8 @@
         margin-bottom: 28px;
       }
 
-      .email-card-eyebrow {
+      .email-card-eyebrow,
+      .whatsapp-card-eyebrow {
         font-size: 12px;
         font-weight: 600;
         letter-spacing: 0.08em;
@@ -1208,18 +1270,22 @@
         margin-bottom: 8px;
       }
 
-      .email-value-display {
+      .email-value-display,
+      .whatsapp-value-display {
         font-family: 'Archivo', sans-serif;
         font-variation-settings: 'wdth' 100, 'wght' 600;
-        font-size: 20px;
+        font-size: 24px;
+        letter-spacing: -0.01em;
         color: #ffffff;
-        word-break: break-all;
+        word-break: break-word;
         margin-bottom: 16px;
       }
 
-      .email-action-row {
+      .email-action-row,
+      .whatsapp-action-row {
         display: flex;
         align-items: center;
+        flex-wrap: wrap;
         gap: 10px;
       }
 
@@ -1233,6 +1299,8 @@
         display: inline-flex;
         align-items: center;
         gap: 6px;
+        border: none;
+        cursor: pointer;
         transition: transform 0.2s ease, background 0.2s ease;
       }
 
@@ -1241,7 +1309,8 @@
         background: #e2e2e2;
       }
 
-      .email-mailto-link {
+      .email-mailto-link,
+      .whatsapp-chat-link {
         background: rgba(255, 255, 255, 0.08);
         border: 1px solid rgba(255, 255, 255, 0.15);
         color: #ffffff;
@@ -1251,12 +1320,15 @@
         font-weight: 500;
         display: inline-flex;
         align-items: center;
-        gap: 6px;
-        transition: background 0.2s ease;
+        gap: 7px;
+        text-decoration: none;
+        transition: background 0.2s ease, border-color 0.2s ease;
       }
 
-      .email-mailto-link:hover {
+      .email-mailto-link:hover,
+      .whatsapp-chat-link:hover {
         background: rgba(255, 255, 255, 0.16);
+        border-color: rgba(255, 255, 255, 0.3);
       }
 
       .copy-alert-msg {
@@ -1435,6 +1507,43 @@
         fill: currentColor;
       }
 
+      /* Real brand colors for footer dock icons */
+      .dock-icon-btn.btn-facebook {
+        color: #1877F2;
+      }
+      .dock-icon-btn.btn-facebook:hover {
+        background: rgba(24, 119, 242, 0.16);
+        border-color: rgba(24, 119, 242, 0.45);
+        color: #1877F2;
+      }
+
+      .dock-icon-btn.btn-linkedin {
+        color: #0A66C2;
+      }
+      .dock-icon-btn.btn-linkedin:hover {
+        background: rgba(10, 102, 194, 0.16);
+        border-color: rgba(10, 102, 194, 0.45);
+        color: #0A66C2;
+      }
+
+      .dock-icon-btn.btn-youtube {
+        color: #FF0000;
+      }
+      .dock-icon-btn.btn-youtube:hover {
+        background: rgba(255, 0, 0, 0.16);
+        border-color: rgba(255, 0, 0, 0.45);
+        color: #FF0000;
+      }
+
+      .dock-icon-btn.btn-whatsapp {
+        color: #25D366;
+      }
+      .dock-icon-btn.btn-whatsapp:hover {
+        background: rgba(37, 211, 102, 0.16);
+        border-color: rgba(37, 211, 102, 0.45);
+        color: #25D366;
+      }
+
       /* ========================================================
          RESPONSIVE BREAKPOINTS (Desktop 1920/1440/1366/1280, Tablet, Mobile)
          ======================================================== */
@@ -1590,15 +1699,6 @@
         }
         .inquiry-form-card {
           padding: 20px;
-        }
-        .fixed-bottom-dock {
-          width: calc(100% - 32px);
-          max-width: 340px;
-          justify-content: space-between;
-          padding: 8px 14px;
-        }
-        .dock-label-prefix {
-          display: none;
         }
       }
 
@@ -1911,10 +2011,6 @@
         .hero-hire-cta { display: none; }
 
         /* 8. Next link */
-        .next-section-link { order: 8; align-self: center; margin: 24px 0 0; font-size: 12px; }
-
-        /* Footer dock: slimmer so it never hides content */
-        .fixed-bottom-dock { bottom: calc(12px + env(safe-area-inset-bottom, 0px)); padding: 6px 14px; }
       }
 
       @media (max-width: 480px) {
@@ -2073,20 +2169,40 @@
       .page-section { scroll-margin-top: 76px; }
 
       /* PHONE: smaller, compact pill centered */
+      /* PHONE: smaller, compact pill centered */
       @media (max-width: 699px) {
-        .fixed-bottom-dock {
-          width: auto;
-          max-width: none;
-          left: 50%;
-          transform: translateX(-50%);
-          justify-content: center;
-          gap: 12px;
-          padding: 5px 12px;
-          bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+        body {
+          padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)) !important;
         }
-        .dock-icon-btn { width: 38px; height: 38px; min-width: 38px; min-height: 38px; }
-        .dock-icon-btn svg { width: 17px; height: 17px; }
-        .dock-label-prefix { display: none; }
+
+        #work {
+          padding-bottom: 72px !important;
+        }
+
+        .fixed-bottom-dock {
+          width: auto !important;
+          max-width: none !important;
+          left: 50% !important;
+          transform: translateX(-50%) !important;
+          justify-content: center !important;
+          gap: 8px !important;
+          padding: 6px 10px !important;
+          border-radius: 9999px !important;
+          bottom: calc(14px + env(safe-area-inset-bottom, 0px)) !important;
+        }
+        .dock-icon-btn {
+          width: 34px !important;
+          height: 34px !important;
+          min-width: 34px !important;
+          min-height: 34px !important;
+        }
+        .dock-icon-btn svg {
+          width: 16px !important;
+          height: 16px !important;
+        }
+        .dock-label-prefix {
+          display: none !important;
+        }
       }
 
       /* DESKTOP / TABLET: bigger */
@@ -2126,6 +2242,237 @@
         .hero-stats-panel .stat-desc { font-size: 7px; letter-spacing: 0; }
       }
 
+      /* Work section on phone screens only (max-width: 699px) */
+      @media (max-width: 699px) {
+        /* 1. Heading "Selected Work" */
+        #work .section-title-large {
+          font-size: 30px !important;
+          line-height: 1.1 !important;
+          letter-spacing: -0.02em !important;
+          margin-bottom: 8px !important;
+        }
+
+        /* 2. Intro paragraph */
+        #work .section-subtitle-text {
+          font-size: 14px !important;
+          line-height: 1.6 !important;
+          color: #8a8a8a !important;
+          max-width: 34ch !important;
+          margin-bottom: 20px !important;
+        }
+
+        /* 3. Stats box: 2x2 grid with subtle dividers */
+        #work .work-kpis-strip {
+          display: grid !important;
+          grid-template-columns: repeat(2, 1fr) !important;
+          gap: 0 !important;
+          padding: 16px !important;
+          border-radius: 16px !important;
+          margin-bottom: 20px !important;
+        }
+
+        #work .work-kpi-item {
+          display: flex !important;
+          flex-direction: column !important;
+          justify-content: center !important;
+          align-items: flex-start !important;
+          text-align: left !important;
+          border: none !important;
+        }
+
+        #work .work-kpi-item:nth-child(odd) {
+          border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+          padding: 6px 14px 6px 0 !important;
+        }
+
+        #work .work-kpi-item:nth-child(even) {
+          padding: 6px 0 6px 14px !important;
+        }
+
+        #work .work-kpi-item:nth-child(-n+2) {
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+          padding-bottom: 14px !important;
+        }
+
+        #work .work-kpi-item:nth-child(n+3) {
+          padding-top: 14px !important;
+        }
+
+        #work .work-kpi-num {
+          font-size: 22px !important;
+          font-weight: 600 !important;
+          line-height: 1.0 !important;
+          margin-bottom: 4px !important;
+          text-align: left !important;
+        }
+
+        #work .work-kpi-label {
+          font-size: 11px !important;
+          text-transform: uppercase !important;
+          letter-spacing: 0.06em !important;
+          color: #8a8a8a !important;
+          line-height: 1.3 !important;
+          text-align: left !important;
+        }
+
+        /* 4. Filter buttons in one scrollable row */
+        #work .work-filter-bar {
+          display: flex !important;
+          flex-wrap: nowrap !important;
+          overflow-x: auto !important;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+          gap: 8px !important;
+          margin-bottom: 20px !important;
+          padding-bottom: 2px;
+        }
+
+        #work .work-filter-bar::-webkit-scrollbar {
+          display: none;
+        }
+
+        #work .work-filter-pill {
+          height: 32px !important;
+          min-height: 32px !important;
+          padding: 0 14px !important;
+          font-size: 12px !important;
+          white-space: nowrap !important;
+          flex-shrink: 0 !important;
+          display: inline-flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          border-radius: 9999px !important;
+        }
+
+        #work .work-filter-pill.active {
+          background: #ffffff !important;
+          color: #0b0b0b !important;
+          border-color: #ffffff !important;
+        }
+
+        /* 5. Compact 2-column project cards */
+        #work .projects-grid-container {
+          grid-template-columns: repeat(2, 1fr) !important;
+          gap: 12px !important;
+        }
+
+        #work .project-item-card {
+          border-radius: 10px;
+        }
+
+        #work .project-thumb-box {
+          aspect-ratio: 4 / 3 !important;
+        }
+
+        #work .project-thumb-canvas svg {
+          max-width: 65%;
+          max-height: 65%;
+        }
+
+        #work .play-circle-disc {
+          width: 32px;
+          height: 32px;
+        }
+
+        #work .play-icon-arrow {
+          border-width: 5px 0 5px 9px;
+          margin-left: 2px;
+        }
+
+        #work .project-info-box {
+          padding: 10px 10px 12px;
+        }
+
+        #work .project-card-header {
+          margin-bottom: 4px;
+          gap: 4px;
+        }
+
+        #work .project-tag-pill {
+          font-size: 9.5px;
+          letter-spacing: 0.05em;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        #work .project-type-indicator {
+          font-size: 9px;
+          white-space: nowrap;
+        }
+
+        #work .project-card-title {
+          font-size: 14px;
+          line-height: 1.25;
+          letter-spacing: -0.015em;
+          gap: 6px;
+          align-items: flex-start;
+        }
+
+        #work .project-card-arrow {
+          font-size: 13px;
+          flex-shrink: 0;
+          margin-top: 1px;
+        }
+
+        /* 6. Work Cards Header & Watch Link on Phones */
+        #work .project-card-header {
+          flex-wrap: wrap;
+          gap: 4px;
+        }
+
+        #work .watch-youtube-link {
+          font-size: 10px;
+          padding: 2px 6px;
+          gap: 3px;
+        }
+
+        .lightbox-backdrop {
+          padding: 24px 16px;
+        }
+
+        .lightbox-close-btn {
+          top: -42px;
+          right: 0;
+          width: 36px;
+          height: 36px;
+          font-size: 18px;
+        }
+
+        .lightbox-container.lightbox-mode-video {
+          width: 90vw;
+          max-width: 100%;
+        }
+
+        .lightbox-container.lightbox-mode-short .lightbox-content-slot {
+          height: 75vh;
+          max-width: 88vw;
+        }
+
+        /* 7. WhatsApp Card on Phones */
+        .direct-whatsapp-card {
+          padding: 18px 16px !important;
+          border-radius: 12px !important;
+          margin-bottom: 22px !important;
+        }
+
+        .whatsapp-value-display {
+          font-size: 20px !important;
+          margin-bottom: 14px !important;
+        }
+
+        .whatsapp-action-row {
+          gap: 8px !important;
+        }
+
+        .whatsapp-action-row .copy-btn-action,
+        .whatsapp-action-row .whatsapp-chat-link {
+          padding: 8px 14px !important;
+          font-size: 12px !important;
+        }
+      }
+
       .section-watermark { display: none !important; }
     </style>
   </head>
@@ -2145,8 +2492,8 @@
       <nav class="nav-pill-wrapper" id="navPillContainer" aria-label="Main Navigation">
         <div class="nav-pill-slider" id="navPillSlider"></div>
         <a href="#home" class="nav-pill-link active" data-target="home">Home</a>
-        <a href="#services" class="nav-pill-link" data-target="services">Services</a>
         <a href="#work" class="nav-pill-link" data-target="work">Work</a>
+        <a href="#services" class="nav-pill-link" data-target="services">Services</a>
         <a href="#contact" class="nav-pill-link" data-target="contact">Contact</a>
       </nav>
 
@@ -2310,6 +2657,69 @@
     </div>
 
     <!-- ========================================================
+         SECTION 03: WORK (Selected Work Grid with Filter Pills & Lightbox)
+         ======================================================== -->
+    <section class="page-section work-section-wrapper" id="work">
+      <div class="shell-container">
+        <div class="section-watermark">
+          <span class="dot"></span>
+          <span>03 / WORK</span>
+        </div>
+        <h2 class="section-title-large">Selected Work</h2>
+        <p class="section-subtitle-text">
+          Curated productions across generative cinematic video, conversion web platforms, and editorial brand systems.
+        </p>
+
+        <!-- Client Counters Strip inside Work -->
+        <div class="work-kpis-strip" id="workCountersStrip">
+          <div class="work-kpi-item">
+            <div class="work-kpi-num work-counter" data-target="50" data-suffix="+">0+</div>
+            <div class="work-kpi-label">Global Projects Delivered</div>
+          </div>
+          <div class="work-kpi-item">
+            <div class="work-kpi-num work-counter" data-target="1800" data-suffix="K+">0K+</div>
+            <div class="work-kpi-label">Organic Campaign Reach</div>
+          </div>
+          <div class="work-kpi-item">
+            <div class="work-kpi-num work-counter" data-target="420" data-suffix="K+">$0K+</div>
+            <div class="work-kpi-label">Pipeline Generated</div>
+          </div>
+          <div class="work-kpi-item">
+            <div class="work-kpi-num work-counter" data-target="99" data-suffix="%">0%</div>
+            <div class="work-kpi-label">Client Satisfaction Score</div>
+          </div>
+        </div>
+
+        <!-- Filter Pills Bar: All, AI Videos, Websites, Graphics -->
+        <div class="work-filter-bar" id="workFilterBar">
+          <button class="work-filter-pill active" data-filter="All">All</button>
+          <button class="work-filter-pill" data-filter="AI Videos">AI Videos</button>
+          <button class="work-filter-pill" data-filter="Websites">Websites</button>
+          <button class="work-filter-pill" data-filter="Graphics">Graphics</button>
+        </div>
+
+        <!-- 3-Column Responsive Work Grid (Populated Data-Driven via JS) -->
+        <div class="projects-grid-container" id="projectsGrid"></div>
+
+        <a href="#contact" class="next-section-link">
+          <span>Next: 04 Contact</span>
+          <span>→</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         LIGHTBOX MODAL (Video Player & Graphic Viewer)
+         ======================================================== -->
+    <div class="lightbox-backdrop" id="workLightbox" role="dialog" aria-modal="true" aria-label="Media Preview">
+      <div class="lightbox-container" id="lightboxContainer">
+        <button class="lightbox-close-btn" id="lightboxCloseBtn" aria-label="Close Preview">✕</button>
+        <div class="lightbox-content-slot" id="lightboxContentSlot"></div>
+        <div class="lightbox-title-caption" id="lightboxCaption"></div>
+      </div>
+    </div>
+
+    <!-- ========================================================
          SECTION 02: SERVICES (Full Viewport)
          ======================================================== -->
     <section class="page-section services-section-wrapper" id="services">
@@ -2421,69 +2831,6 @@
     </section>
 
     <!-- ========================================================
-         SECTION 03: WORK (Selected Work Grid with Filter Pills & Lightbox)
-         ======================================================== -->
-    <section class="page-section work-section-wrapper" id="work">
-      <div class="shell-container">
-        <div class="section-watermark">
-          <span class="dot"></span>
-          <span>03 / WORK</span>
-        </div>
-        <h2 class="section-title-large">Selected Work</h2>
-        <p class="section-subtitle-text">
-          Curated productions across generative cinematic video, conversion web platforms, and editorial brand systems.
-        </p>
-
-        <!-- Client Counters Strip inside Work -->
-        <div class="work-kpis-strip" id="workCountersStrip">
-          <div class="work-kpi-item">
-            <div class="work-kpi-num work-counter" data-target="50" data-suffix="+">0+</div>
-            <div class="work-kpi-label">Global Projects Delivered</div>
-          </div>
-          <div class="work-kpi-item">
-            <div class="work-kpi-num work-counter" data-target="1800" data-suffix="K+">0K+</div>
-            <div class="work-kpi-label">Organic Campaign Reach</div>
-          </div>
-          <div class="work-kpi-item">
-            <div class="work-kpi-num work-counter" data-target="420" data-suffix="K+">$0K+</div>
-            <div class="work-kpi-label">Pipeline Generated</div>
-          </div>
-          <div class="work-kpi-item">
-            <div class="work-kpi-num work-counter" data-target="99" data-suffix="%">0%</div>
-            <div class="work-kpi-label">Client Satisfaction Score</div>
-          </div>
-        </div>
-
-        <!-- Filter Pills Bar: All, AI Videos, Websites, Graphics -->
-        <div class="work-filter-bar" id="workFilterBar">
-          <button class="work-filter-pill active" data-filter="All">All</button>
-          <button class="work-filter-pill" data-filter="AI Videos">AI Videos</button>
-          <button class="work-filter-pill" data-filter="Websites">Websites</button>
-          <button class="work-filter-pill" data-filter="Graphics">Graphics</button>
-        </div>
-
-        <!-- 3-Column Responsive Work Grid (Populated Data-Driven via JS) -->
-        <div class="projects-grid-container" id="projectsGrid"></div>
-
-        <a href="#contact" class="next-section-link">
-          <span>Next: 04 Contact</span>
-          <span>→</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- ========================================================
-         LIGHTBOX MODAL (Video Player & Graphic Viewer)
-         ======================================================== -->
-    <div class="lightbox-backdrop" id="workLightbox" role="dialog" aria-modal="true" aria-label="Media Preview">
-      <div class="lightbox-container">
-        <button class="lightbox-close-btn" id="lightboxCloseBtn" aria-label="Close Preview">✕</button>
-        <div class="lightbox-content-slot" id="lightboxContentSlot"></div>
-        <div class="lightbox-title-caption" id="lightboxCaption"></div>
-      </div>
-    </div>
-
-    <!-- ========================================================
          SECTION 04: CONTACT (Full Viewport)
          ======================================================== -->
     <section class="page-section contact-section-wrapper" id="contact">
@@ -2501,20 +2848,29 @@
               Available for select freelance commissions, AI video productions, digital marketing overhauls, and bespoke web platforms.
             </p>
 
-            <!-- Direct Email Card -->
-            <div class="direct-email-card">
-              <div class="email-card-eyebrow">Direct Inbox</div>
-              <div class="email-value-display" id="displayEmail">yeshin555555@gmail.com</div>
-              <div class="email-action-row">
-                <button class="copy-btn-action" id="btnCopyEmail" aria-label="Copy email address to clipboard">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <!-- Direct WhatsApp Card -->
+            <div class="direct-whatsapp-card">
+              <div class="whatsapp-card-eyebrow">WHATSAPP</div>
+              <div class="whatsapp-value-display" id="displayWhatsappNumber">+880 1729-512943</div>
+              <div class="whatsapp-action-row">
+                <button class="copy-btn-action" id="btnCopyWhatsapp" aria-label="Copy WhatsApp number to clipboard">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
                     <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
                   </svg>
-                  <span id="copyFeedbackText">Copy Email</span>
+                  <span id="copyFeedbackText">Copy Number</span>
                 </button>
-                <a href="mailto:yeshin555555@gmail.com" class="email-mailto-link" aria-label="Open email client">
-                  <span>Send Mail ↗</span>
+                <a
+                  href="https://wa.me/8801729512943"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="whatsapp-chat-link"
+                  aria-label="Send message on WhatsApp"
+                >
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="#25D366" aria-hidden="true" style="flex-shrink:0;">
+                    <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67M9.11 7.44C8.95 7.44 8.68 7.5 8.46 7.74C8.24 7.97 7.63 8.55 7.63 9.71C7.63 10.87 8.48 11.98 8.6 12.14C8.72 12.3 10.27 14.69 12.63 15.71C13.2 15.95 13.63 16.1 13.98 16.21C14.54 16.39 15.06 16.36 15.46 16.3C15.91 16.24 16.84 15.74 17.03 15.2C17.23 14.67 17.23 14.21 17.17 14.11C17.11 14.01 16.95 13.96 16.71 13.84C16.48 13.72 15.31 13.15 15.09 13.07C14.88 12.99 14.72 12.95 14.56 13.19C14.4 13.43 13.94 13.96 13.8 14.12C13.66 14.28 13.52 14.3 13.29 14.18C13.05 14.06 12.3 13.82 11.41 13.03C10.72 12.41 10.25 11.66 10.12 11.42C9.99 11.18 10.11 11.06 10.23 10.94C10.33 10.84 10.46 10.67 10.58 10.53C10.7 10.39 10.74 10.29 10.82 10.13C10.9 9.97 10.86 9.83 10.8 9.71C10.74 9.59 10.28 8.46 10.08 7.99C9.9 7.53 9.7 7.59 9.56 7.58C9.42 7.58 9.26 7.57 9.11 7.57" />
+                  </svg>
+                  <span>Send Message</span>
                 </a>
                 <span class="copy-alert-msg" id="copyAlertToast">Copied to clipboard!</span>
               </div>
@@ -2594,45 +2950,59 @@
     <nav class="fixed-bottom-dock" aria-label="Quick Connect Glass Dock">
       <span class="dock-label-prefix">Connect:</span>
 
-      <!-- WhatsApp Button -->
+      <!-- Facebook Button -->
       <a
-        href="https://wa.me/8801XXXXXXXXX"
+        href="https://www.facebook.com/share/1AD5eyU1bb/"
         target="_blank"
         rel="noopener noreferrer"
-        class="dock-icon-btn"
-        aria-label="Chat with Yasin Arafat on WhatsApp"
-        title="WhatsApp"
+        class="dock-icon-btn btn-facebook"
+        aria-label="Facebook"
+        title="Facebook"
       >
-        <svg viewBox="0 0 24 24" role="img">
-          <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67M9.11 7.44C8.95 7.44 8.68 7.5 8.46 7.74C8.24 7.97 7.63 8.55 7.63 9.71C7.63 10.87 8.48 11.98 8.6 12.14C8.72 12.3 10.27 14.69 12.63 15.71C13.2 15.95 13.63 16.1 13.98 16.21C14.54 16.39 15.06 16.36 15.46 16.3C15.91 16.24 16.84 15.74 17.03 15.2C17.23 14.67 17.23 14.21 17.17 14.11C17.11 14.01 16.95 13.96 16.71 13.84C16.48 13.72 15.31 13.15 15.09 13.07C14.88 12.99 14.72 12.95 14.56 13.19C14.4 13.43 13.94 13.96 13.8 14.12C13.66 14.28 13.52 14.3 13.29 14.18C13.05 14.06 12.3 13.82 11.41 13.03C10.72 12.41 10.25 11.66 10.12 11.42C9.99 11.18 10.11 11.06 10.23 10.94C10.33 10.84 10.46 10.67 10.58 10.53C10.7 10.39 10.74 10.29 10.82 10.13C10.9 9.97 10.86 9.83 10.8 9.71C10.74 9.59 10.28 8.46 10.08 7.99C9.9 7.53 9.7 7.59 9.56 7.58C9.42 7.58 9.26 7.57 9.11 7.57" />
+        <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
+          <path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z" />
         </svg>
       </a>
 
       <!-- LinkedIn Button -->
       <a
-        href="https://linkedin.com/in/YOUR-HANDLE"
+        href="https://www.linkedin.com/in/yasin-arafat-447b853a4"
         target="_blank"
         rel="noopener noreferrer"
-        class="dock-icon-btn"
-        aria-label="Connect with Yasin Arafat on LinkedIn"
+        class="dock-icon-btn btn-linkedin"
+        aria-label="LinkedIn"
         title="LinkedIn"
       >
-        <svg viewBox="0 0 24 24" role="img">
+        <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
           <path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z" />
         </svg>
       </a>
 
-      <!-- Facebook Button -->
+      <!-- YouTube Button -->
       <a
-        href="https://facebook.com/YOUR-HANDLE"
+        href="https://youtube.com/@yasin___arafat-ai"
         target="_blank"
         rel="noopener noreferrer"
-        class="dock-icon-btn"
-        aria-label="Follow Yasin Arafat on Facebook"
-        title="Facebook"
+        class="dock-icon-btn btn-youtube"
+        aria-label="YouTube"
+        title="YouTube"
       >
-        <svg viewBox="0 0 24 24" role="img">
-          <path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z" />
+        <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
+          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+        </svg>
+      </a>
+
+      <!-- WhatsApp Button -->
+      <a
+        href="https://wa.me/8801729512943"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="dock-icon-btn btn-whatsapp"
+        aria-label="WhatsApp"
+        title="WhatsApp"
+      >
+        <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
+          <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67M9.11 7.44C8.95 7.44 8.68 7.5 8.46 7.74C8.24 7.97 7.63 8.55 7.63 9.71C7.63 10.87 8.48 11.98 8.6 12.14C8.72 12.3 10.27 14.69 12.63 15.71C13.2 15.95 13.63 16.1 13.98 16.21C14.54 16.39 15.06 16.36 15.46 16.3C15.91 16.24 16.84 15.74 17.03 15.2C17.23 14.67 17.23 14.21 17.17 14.11C17.11 14.01 16.95 13.96 16.71 13.84C16.48 13.72 15.31 13.15 15.09 13.07C14.88 12.99 14.72 12.95 14.56 13.19C14.4 13.43 13.94 13.96 13.8 14.12C13.66 14.28 13.52 14.3 13.29 14.18C13.05 14.06 12.3 13.82 11.41 13.03C10.72 12.41 10.25 11.66 10.12 11.42C9.99 11.18 10.11 11.06 10.23 10.94C10.33 10.84 10.46 10.67 10.58 10.53C10.7 10.39 10.74 10.29 10.82 10.13C10.9 9.97 10.86 9.83 10.8 9.71C10.74 9.59 10.28 8.46 10.08 7.99C9.9 7.53 9.7 7.59 9.56 7.58C9.42 7.58 9.26 7.57 9.11 7.57" />
         </svg>
       </a>
     </nav>
@@ -2663,12 +3033,22 @@
         */
         const projects = [
           {
-            title: "Automata X — Generative Commercial",
+            title: "Video Title",
+            subheading: "Videos",
             category: "AI Videos",
-            type: "video",
-            src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-            thumb: "gradient-v1",
-            link: ""
+            type: "youtube-video",
+            videoId: "jd7TVFC06P0",
+            youtubeUrl: "https://youtu.be/jd7TVFC06P0",
+            thumbnail: "https://img.youtube.com/vi/jd7TVFC06P0/hqdefault.jpg"
+          },
+          {
+            title: "Short Title",
+            subheading: "Shorts",
+            category: "AI Videos",
+            type: "youtube-short",
+            videoId: "rVSdFFkqRFs",
+            youtubeUrl: "https://youtube.com/shorts/rVSdFFkqRFs",
+            thumbnail: "https://img.youtube.com/vi/rVSdFFkqRFs/hqdefault.jpg"
           },
           {
             title: "Kroma Studio Web Platform",
@@ -2684,14 +3064,6 @@
             type: "image",
             src: "graphic-1",
             thumb: "gradient-g1",
-            link: ""
-          },
-          {
-            title: "Synthetic Runway 2026",
-            category: "AI Videos",
-            type: "video",
-            src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-            thumb: "gradient-v2",
             link: ""
           },
           {
@@ -2770,6 +3142,114 @@
           `
         };
 
+        function openYouTubeModal(videoId, isShort, titleText) {
+          if (!lightbox || !lightboxSlot) return;
+          lightboxSlot.innerHTML = '';
+
+          const container = document.getElementById('lightboxContainer') || (lightbox ? lightbox.querySelector('.lightbox-container') : null);
+          if (container) {
+            container.classList.remove('lightbox-mode-video', 'lightbox-mode-short');
+            container.classList.add(isShort ? 'lightbox-mode-short' : 'lightbox-mode-video');
+          }
+
+          const iframe = document.createElement('iframe');
+          iframe.className = 'lightbox-youtube-iframe';
+          iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
+          iframe.title = titleText || 'YouTube Video';
+          iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen');
+          iframe.setAttribute('allowfullscreen', 'true');
+          iframe.setAttribute('loading', 'lazy');
+
+          lightboxSlot.appendChild(iframe);
+          if (lightboxCaption) lightboxCaption.textContent = titleText || '';
+          lightbox.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+
+        function createProjectCard(p) {
+          const card = document.createElement('article');
+          card.className = 'project-item-card';
+          card.setAttribute('tabindex', '0');
+          card.setAttribute('role', 'button');
+          card.setAttribute('aria-label', `${p.title} (${p.category})`);
+
+          let thumbCanvasContent = '';
+          let isVideo = false;
+          let headerAction = '';
+
+          if (p.type === 'youtube-video' || p.type === 'youtube-short') {
+            isVideo = true;
+            thumbCanvasContent = `
+              <img src="${p.thumbnail}" alt="${p.title}" class="project-thumb-img" loading="lazy" />
+            `;
+            headerAction = `
+              <a
+                href="${p.youtubeUrl}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="watch-youtube-link"
+                aria-label="Watch ${p.title} on YouTube"
+                onclick="event.stopPropagation();"
+              >
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#FF0000" aria-hidden="true" style="flex-shrink:0;">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                </svg>
+                <span>Watch on YouTube</span>
+              </a>
+            `;
+          } else {
+            thumbCanvasContent = thumbVisuals[p.thumb] || `
+              <div style="width:100%;height:100%;background:#1a1a1a;display:flex;align-items:center;justify-content:center;color:#888;">
+                ${p.title}
+              </div>
+            `;
+            const typeLabel = p.type === 'site' ? 'External Site' : 'Full Image';
+            headerAction = `<span class="project-type-indicator">${typeLabel}</span>`;
+          }
+
+          const playBadge = isVideo
+            ? `
+              <div class="video-play-overlay">
+                <div class="play-circle-disc">
+                  <div class="play-icon-arrow"></div>
+                </div>
+              </div>
+            `
+            : '';
+
+          const displayTag = p.subheading || p.category;
+          const arrowGlyph = isVideo ? '▶' : (p.type === 'site' ? '↗' : '⊕');
+
+          card.innerHTML = `
+            <div class="project-thumb-box">
+              <div class="project-thumb-canvas">
+                ${thumbCanvasContent}
+              </div>
+              ${playBadge}
+            </div>
+            <div class="project-info-box">
+              <div class="project-card-header">
+                <span class="project-tag-pill">${displayTag}</span>
+                ${headerAction}
+              </div>
+              <div class="project-card-title">
+                <span>${p.title}</span>
+                <span class="project-card-arrow">${arrowGlyph}</span>
+              </div>
+            </div>
+          `;
+
+          card.addEventListener('click', () => handleProjectClick(p));
+          card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              handleProjectClick(p);
+            }
+          });
+
+          return card;
+        }
+
         function renderProjects() {
           if (!projectsGrid) return;
           projectsGrid.innerHTML = '';
@@ -2779,59 +3259,7 @@
             : projects.filter(p => p.category === activeFilter);
 
           filtered.forEach((p) => {
-            const card = document.createElement('article');
-            card.className = 'project-item-card';
-            card.setAttribute('tabindex', '0');
-            card.setAttribute('role', 'button');
-            card.setAttribute('aria-label', `${p.title} (${p.category})`);
-
-            const thumbContent = thumbVisuals[p.thumb] || `
-              <div style="width:100%;height:100%;background:#1a1a1a;display:flex;align-items:center;justify-content:center;color:#888;">
-                ${p.title}
-              </div>
-            `;
-
-            const isVideo = p.type === 'video';
-            const playBadge = isVideo
-              ? `
-                <div class="video-play-overlay">
-                  <div class="play-circle-disc">
-                    <div class="play-icon-arrow"></div>
-                  </div>
-                </div>
-              `
-              : '';
-
-            const typeLabel = p.type === 'video' ? 'Video' : p.type === 'site' ? 'External Site' : 'Full Image';
-
-            card.innerHTML = `
-              <div class="project-thumb-box">
-                <div class="project-thumb-canvas">
-                  ${thumbContent}
-                </div>
-                ${playBadge}
-              </div>
-              <div class="project-info-box">
-                <div class="project-card-header">
-                  <span class="project-tag-pill">${p.category}</span>
-                  <span class="project-type-indicator">${typeLabel}</span>
-                </div>
-                <div class="project-card-title">
-                  <span>${p.title}</span>
-                  <span class="project-card-arrow">${p.type === 'site' ? '↗' : '⊕'}</span>
-                </div>
-              </div>
-            `;
-
-            card.addEventListener('click', () => handleProjectClick(p));
-            card.addEventListener('keydown', (e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                handleProjectClick(p);
-              }
-            });
-
-            projectsGrid.appendChild(card);
+            projectsGrid.appendChild(createProjectCard(p));
           });
         }
 
@@ -2898,12 +3326,21 @@
           if (!lightbox) return;
           lightbox.classList.remove('active');
           document.body.style.overflow = '';
-          if (lightboxSlot) lightboxSlot.textContent = '';
+          if (lightboxSlot) {
+            // Remove iframe src to stop video immediately
+            lightboxSlot.innerHTML = '';
+          }
+          const container = document.getElementById('lightboxContainer') || (lightbox ? lightbox.querySelector('.lightbox-container') : null);
+          if (container) {
+            container.classList.remove('lightbox-mode-video', 'lightbox-mode-short');
+          }
         }
 
         function handleProjectClick(p) {
           if (!p || typeof p !== 'object') return;
-          if (p.type === 'site') {
+          if (p.type === 'youtube-video' || p.type === 'youtube-short') {
+            openYouTubeModal(p.videoId, p.type === 'youtube-short', p.title);
+          } else if (p.type === 'site') {
             const safeUrl = sanitizeExternalUrl(p.link || 'https://google.com');
             if (safeUrl) {
               const opened = window.open(safeUrl, '_blank', 'noopener,noreferrer');
@@ -2916,6 +3353,11 @@
               console.warn('Blocked non-whitelisted video source:', rawSrc);
               return;
             }
+            const container = document.getElementById('lightboxContainer') || (lightbox ? lightbox.querySelector('.lightbox-container') : null);
+            if (container) {
+              container.classList.remove('lightbox-mode-short');
+              container.classList.add('lightbox-mode-video');
+            }
             const videoEl = document.createElement('video');
             videoEl.className = 'lightbox-video-player';
             videoEl.controls = true;
@@ -2924,6 +3366,10 @@
             videoEl.src = safeVideoUrl;
             openLightbox(videoEl, p.title);
           } else if (p.type === 'image') {
+            const container = document.getElementById('lightboxContainer') || (lightbox ? lightbox.querySelector('.lightbox-container') : null);
+            if (container) {
+              container.classList.remove('lightbox-mode-short', 'lightbox-mode-video');
+            }
             const graphicContainer = document.createElement('div');
             graphicContainer.style.cssText = 'width:100%;height:100%;background:#111;display:flex;align-items:center;justify-content:center;padding:40px;';
             graphicContainer.innerHTML = `
@@ -3256,38 +3702,42 @@
         setupFilterPills('servicesPillsGroup', true);
         setupFilterPills('budgetPillsGroup', false);
 
-        // --- 9. ONE-CLICK EMAIL COPY ---
-        const btnCopyEmail = document.getElementById('btnCopyEmail');
+        // --- 9. ONE-CLICK WHATSAPP NUMBER COPY ---
+        const btnCopyWhatsapp = document.getElementById('btnCopyWhatsapp');
         const copyFeedbackText = document.getElementById('copyFeedbackText');
         const copyAlertToast = document.getElementById('copyAlertToast');
-        const displayEmail = document.getElementById('displayEmail');
+        let copyFeedbackTimer = null;
 
-        if (btnCopyEmail && displayEmail) {
-          btnCopyEmail.addEventListener('click', async () => {
-            const email = displayEmail.textContent.trim();
+        if (btnCopyWhatsapp && copyFeedbackText) {
+          btnCopyWhatsapp.addEventListener('click', async () => {
+            const rawNumber = '+8801729512943';
             try {
               if (navigator.clipboard && navigator.clipboard.writeText) {
-                await navigator.clipboard.writeText(email);
+                await navigator.clipboard.writeText(rawNumber);
               } else {
                 const textArea = document.createElement('textarea');
-                textArea.value = email;
+                textArea.value = rawNumber;
                 document.body.appendChild(textArea);
                 textArea.select();
                 document.execCommand('copy');
                 document.body.removeChild(textArea);
               }
 
+              if (copyFeedbackTimer) clearTimeout(copyFeedbackTimer);
               copyFeedbackText.textContent = 'Copied!';
               if (copyAlertToast) copyAlertToast.classList.add('visible');
 
-              setTimeout(() => {
-                copyFeedbackText.textContent = 'Copy Email';
+              copyFeedbackTimer = setTimeout(() => {
+                copyFeedbackText.textContent = 'Copy Number';
                 if (copyAlertToast) copyAlertToast.classList.remove('visible');
-              }, 2400);
+              }, 2000);
             } catch (err) {
               console.error('Copy failed:', err);
+              if (copyFeedbackTimer) clearTimeout(copyFeedbackTimer);
               copyFeedbackText.textContent = 'Copied!';
-              setTimeout(() => copyFeedbackText.textContent = 'Copy Email', 2000);
+              copyFeedbackTimer = setTimeout(() => {
+                copyFeedbackText.textContent = 'Copy Number';
+              }, 2000);
             }
           });
         }
