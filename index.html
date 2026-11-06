@@ -6,7 +6,7 @@
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self' https://commondatastorage.googleapis.com blob:; connect-src 'self' ws: wss:; frame-src https://www.youtube-nocookie.com https://www.youtube.com; object-src 'none'; base-uri 'self';"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self' https://commondatastorage.googleapis.com blob:; connect-src 'self' ws: wss: https:; frame-src https://www.youtube-nocookie.com https://www.youtube.com; object-src 'none'; base-uri 'self';"
     />
     <title>Yasin Arafat — AI Creator & Digital Services</title>
     <meta name="theme-color" content="#080808" />
@@ -3699,7 +3699,7 @@
             <form id="contactFormElement" onsubmit="return false;">
               <!-- Honeypot Field for anti-bot protection -->
               <div style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;" aria-hidden="true">
-                <input type="text" name="_contact_hp" id="formHoneypot" tabindex="-1" autocomplete="off" />
+                <input type="text" name="_gotcha" id="formGotcha" tabindex="-1" autocomplete="off" />
               </div>
 
               <!-- Name & Work Email in one row on tablet/desktop -->
@@ -3858,6 +3858,9 @@
     <script>
       (function () {
         'use strict';
+
+        const SUPABASE_URL = "YOUR_PROJECT_URL";
+        const SUPABASE_KEY = "YOUR_ANON_OR_PUBLISHABLE_KEY";
 
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -4705,6 +4708,15 @@
           }
         }
 
+        function showFormError() {
+          if (!formSuccessToast) return;
+          formSuccessToast.style.display = 'block';
+          formSuccessToast.style.borderColor = 'rgba(239, 68, 68, 0.35)';
+          formSuccessToast.style.color = '#ef4444';
+          formSuccessToast.style.background = 'rgba(239, 68, 68, 0.1)';
+          formSuccessToast.innerHTML = 'Something went wrong. Please message me on <a href="https://wa.me/8801729512943" target="_blank" rel="noopener noreferrer" style="color: #ffffff; text-decoration: underline; font-weight: 600;">WhatsApp</a> instead.';
+        }
+
         function clearFieldError(inputEl, errorEl) {
           if (inputEl) {
             inputEl.classList.remove('has-error');
@@ -4738,13 +4750,23 @@
         }
 
         if (contactFormElement) {
-          contactFormElement.addEventListener('submit', (e) => {
+          contactFormElement.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            // Clear previous errors
+            // Clear previous errors & status toast
             clearFieldError(nameInput, nameError);
             clearFieldError(emailInput, emailError);
             clearFieldError(briefInput, briefError);
+            if (formSuccessToast) {
+              formSuccessToast.style.display = 'none';
+              formSuccessToast.innerHTML = '';
+            }
+
+            // Hidden honeypot check ("_gotcha") - do not send if filled
+            const gotcha = document.getElementById('formGotcha') || document.querySelector('input[name="_gotcha"]');
+            if (gotcha && gotcha.value.trim().length > 0) {
+              return;
+            }
 
             // Extract and trim inputs
             const name = (nameInput ? nameInput.value : '').trim();
@@ -4755,54 +4777,31 @@
 
             // Validate Name
             if (!name) {
-              setFieldError(nameInput, nameError, 'Please enter your name.');
-              if (!firstInvalidEl) firstInvalidEl = nameInput;
-            } else if (name.length > 80) {
-              setFieldError(nameInput, nameError, 'Name cannot exceed 80 characters.');
+              setFieldError(nameInput, nameError, 'Name is required.');
               if (!firstInvalidEl) firstInvalidEl = nameInput;
             }
 
             // Validate Email
-            const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!email) {
-              setFieldError(emailInput, emailError, 'Please enter your work email.');
+              setFieldError(emailInput, emailError, 'Valid email is required.');
               if (!firstInvalidEl) firstInvalidEl = emailInput;
-            } else if (email.length > 120 || !emailRegex.test(email)) {
-              setFieldError(emailInput, emailError, 'Please enter a valid work email address (e.g. name@company.com).');
+            } else if (!emailRegex.test(email)) {
+              setFieldError(emailInput, emailError, 'Please enter a valid email address.');
               if (!firstInvalidEl) firstInvalidEl = emailInput;
             }
 
             // Validate Project Brief
             if (!brief) {
-              setFieldError(briefInput, briefError, 'Please describe your objectives, timeline, or current roadblocks.');
-              if (!firstInvalidEl) firstInvalidEl = briefInput;
-            } else if (brief.length > 2000) {
-              setFieldError(briefInput, briefError, 'Project brief cannot exceed 2000 characters.');
+              setFieldError(briefInput, briefError, 'Brief is required.');
               if (!firstInvalidEl) firstInvalidEl = briefInput;
             }
 
-            // If any validation failed, keep entered text and focus first invalid input
+            // If validation failed, focus first invalid input and stop
             if (firstInvalidEl) {
               firstInvalidEl.focus();
               return;
             }
-
-            // Honeypot check (silently drop bot submissions)
-            const honeypot = document.getElementById('formHoneypot');
-            if (honeypot && honeypot.value.trim().length > 0) {
-              contactFormElement.reset();
-              return;
-            }
-
-            // 10-second client-side submit cooldown
-            const now = Date.now();
-            if (now - lastContactSubmitTime < 10000) {
-              const secondsLeft = Math.ceil((10000 - (now - lastContactSubmitTime)) / 1000);
-              showFormToast(`Please wait ${secondsLeft} second${secondsLeft > 1 ? 's' : ''} before submitting again.`, true);
-              return;
-            }
-
-            lastContactSubmitTime = Date.now();
 
             const selectedServices = Array.from(document.querySelectorAll('#servicesPillsGroup .filter-pill.active'))
               .map(p => p.getAttribute('data-val') || '')
@@ -4811,34 +4810,60 @@
 
             const selectedBudget = document.querySelector('#budgetPillsGroup .filter-pill.active')?.getAttribute('data-val') || '$1K - $3K';
 
-            // Disable submit button while sending
+            // Disable submit button and show "Sending..."
             const submitBtn = document.getElementById('btnSubmitForm');
             if (submitBtn) {
               submitBtn.disabled = true;
               submitBtn.style.opacity = '0.6';
-              setSubmitButtonState(submitBtn, 'Dispatching Inquiry...', null);
+              setSubmitButtonState(submitBtn, 'Sending...', null);
             }
 
-            console.log('Client Inquiry Dispatched:', { name, email, selectedServices, selectedBudget, brief });
+            try {
+              const endpoint = `${SUPABASE_URL.replace(/\/+$/, '')}/rest/v1/leads`;
+              const response = await fetch(endpoint, {
+                method: 'POST',
+                headers: {
+                  'apikey': SUPABASE_KEY,
+                  'Authorization': `Bearer ${SUPABASE_KEY}`,
+                  'Content-Type': 'application/json',
+                  'Prefer': 'return=minimal'
+                },
+                body: JSON.stringify({
+                  name: name,
+                  email: email,
+                  services: selectedServices,
+                  budget: selectedBudget,
+                  brief: brief
+                })
+              });
 
-            // Show success notification
-            showFormToast('Inquiry received. Yasin will review your requirements and reply within 24 hours.', false);
-            if (submitBtn) {
-              setSubmitButtonState(submitBtn, 'Request Dispatched ✓', null);
-            }
+              if (response.status === 201) {
+                // Clear the form on HTTP 201 success
+                contactFormElement.reset();
+                clearFieldError(nameInput, nameError);
+                clearFieldError(emailInput, emailError);
+                clearFieldError(briefInput, briefError);
 
-            setTimeout(() => {
-              contactFormElement.reset();
-              clearFieldError(nameInput, nameError);
-              clearFieldError(emailInput, emailError);
-              clearFieldError(briefInput, briefError);
-              if (formSuccessToast) formSuccessToast.style.display = 'none';
+                showFormToast('Thank you! Your request has been sent. I will reply within 24 hours.', false);
+
+                if (submitBtn) {
+                  submitBtn.disabled = false;
+                  submitBtn.style.opacity = '1';
+                  setSubmitButtonState(submitBtn, 'Send Discovery Request', '↗');
+                }
+              } else {
+                throw new Error(`HTTP ${response.status}`);
+              }
+            } catch (err) {
+              console.error('Lead submission failed:', err);
+              showFormError();
+
               if (submitBtn) {
                 submitBtn.disabled = false;
                 submitBtn.style.opacity = '1';
                 setSubmitButtonState(submitBtn, 'Send Discovery Request', '↗');
               }
-            }, 5000);
+            }
           });
         }
       })();
