@@ -2654,275 +2654,17 @@
       }
 
       /* ========================================================
-         GAP REDUCTION & LAYOUT: SERVICES -> PAYMENT -> CONTACT
+         GAP REDUCTION & LAYOUT: SERVICES -> CONTACT
          ======================================================== */
       #services {
         margin-bottom: 0 !important;
-        min-height: auto !important;
-      }
-      #payment {
-        scroll-margin-top: 76px !important;
-        margin-top: 0 !important;
         min-height: auto !important;
       }
       #contact {
         scroll-margin-top: 76px !important;
         margin-top: 0 !important;
         min-height: auto !important;
-        padding-bottom: 80px !important; /* safe clearance for fixed bottom footer dock at the very bottom of the page */
-      }
-
-      /* ========================================================
-         SECTION: PAYMENT (Mobile Wallets)
-         ======================================================== */
-      .payment-section-wrapper {
-        background-color: var(--bg-dark, #0b0b0b);
-        position: relative;
-      }
-
-      .payment-container {
-        max-width: 1100px;
-        margin: 0 auto;
-        width: 100%;
-        box-sizing: border-box;
-      }
-
-      .payment-eyebrow {
-        font-size: 12px;
-        font-weight: 600;
-        letter-spacing: 0.12em;
-        color: var(--text-muted, #8c8c8c);
-        text-transform: uppercase;
-        margin-bottom: 12px;
-      }
-
-      .payment-heading {
-        font-family: 'Archivo', sans-serif;
-        font-variation-settings: 'wdth' 104, 'wght' 700;
-        font-size: clamp(32px, 4.2vw, 54px);
-        line-height: 1.1;
-        letter-spacing: -0.03em;
-        color: #ffffff;
-        margin: 0 0 12px 0;
-      }
-
-      .payment-intro {
-        font-size: 15.5px;
-        color: #a5a5a5;
-        line-height: 1.55;
-        max-width: 580px;
-        margin: 0 0 32px 0;
-      }
-
-      /* Notice Card: How to pay */
-      .payment-notice-card {
-        background: #111111;
-        border: 1px solid var(--hairline-medium, rgba(255, 255, 255, 0.12));
-        border-radius: 20px;
-        padding: 24px 28px;
-        margin-bottom: 28px;
-        box-sizing: border-box;
-      }
-
-      .payment-notice-header {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 18px;
-      }
-
-      .payment-info-icon {
-        color: #aaaaaa;
-        flex-shrink: 0;
-      }
-
-      .payment-notice-title {
-        font-family: 'Archivo', sans-serif;
-        font-variation-settings: 'wdth' 100, 'wght' 600;
-        font-size: 17px;
-        color: #ffffff;
-        margin: 0;
-        letter-spacing: -0.01em;
-      }
-
-      .payment-steps-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 14px 28px;
-      }
-
-      .payment-step-item {
-        display: flex;
-        align-items: flex-start;
-        gap: 12px;
-        font-size: 13.5px;
-        line-height: 1.5;
-        color: #c0c0c0;
-      }
-
-      .step-badge {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 22px;
-        height: 22px;
-        border-radius: 9999px;
-        background: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.18);
-        color: #ffffff;
-        font-size: 11px;
-        font-weight: 700;
-        flex-shrink: 0;
-        margin-top: 1px;
-      }
-
-      .payment-notice-note {
-        font-size: 12.5px;
-        color: #8c8c8c;
-        line-height: 1.5;
-        margin-top: 18px;
-        padding-top: 14px;
-        border-top: 1px solid rgba(255, 255, 255, 0.08);
-      }
-
-      /* 4 Method Cards Grid */
-      .payment-methods-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
-        align-items: stretch;
-      }
-
-      .payment-method-card {
-        background: #111111;
-        border: 1px solid var(--hairline-medium, rgba(255, 255, 255, 0.12));
-        border-radius: 20px;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        position: relative;
-        overflow: hidden;
-        box-sizing: border-box;
-        transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
-      }
-
-      .payment-method-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 3px;
-        background: var(--brand-color);
-        opacity: 0;
-        transition: opacity 0.25s ease;
-      }
-
-      .payment-method-card:hover {
-        transform: translateY(-2px);
-        border-color: rgba(255, 255, 255, 0.24);
-        box-shadow: 0 10px 30px -10px var(--brand-glow);
-      }
-
-      .payment-method-card:hover::before {
-        opacity: 1;
-      }
-
-      .method-badge-pill {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 5px 14px;
-        border-radius: 9999px;
-        color: #ffffff;
-        font-size: 13px;
-        font-weight: 700;
-        letter-spacing: 0.02em;
-        margin-bottom: 14px;
-        align-self: flex-start;
-        user-select: none;
-      }
-
-      .method-action-label {
-        font-size: 11.5px;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        color: var(--text-muted, #8c8c8c);
-        margin-bottom: 6px;
-      }
-
-      .method-phone-number {
-        font-family: 'Archivo', sans-serif;
-        font-variation-settings: 'wdth' 100, 'wght' 600;
-        font-size: 20px;
-        color: #ffffff;
-        letter-spacing: -0.01em;
-        margin-bottom: 18px;
-        word-break: break-all;
-      }
-
-      .method-copy-btn {
-        width: 100%;
-        height: 42px;
-        border-radius: 9999px;
-        background: rgba(255, 255, 255, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.16);
-        color: #ffffff;
-        font-size: 13px;
-        font-weight: 600;
-        cursor: pointer;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-        margin-top: auto;
-        box-sizing: border-box;
-        transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease, color 0.2s ease;
-      }
-
-      .method-copy-btn:hover {
-        background: rgba(255, 255, 255, 0.16);
-        border-color: rgba(255, 255, 255, 0.3);
-      }
-
-      .method-copy-btn.copied {
-        background: #ffffff;
-        color: #0b0b0b;
-        border-color: #ffffff;
-      }
-
-      /* Confirm on WhatsApp button */
-      .payment-whatsapp-btn {
-        width: 100%;
-        height: 52px;
-        background: #ffffff;
-        color: #0b0b0b;
-        border-radius: 14px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        font-size: 15px;
-        font-weight: 600;
-        text-decoration: none;
-        margin-top: 24px;
-        box-sizing: border-box;
-        transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease;
-        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
-      }
-
-      .payment-whatsapp-btn:hover {
-        background: #e5e5e5;
-        transform: translateY(-1px);
-      }
-
-      .payment-whatsapp-btn:hover .arrow-glyph {
-        transform: translate(2px, -2px);
+        padding-bottom: 80px !important; /* safe clearance for fixed bottom footer dock at the end of the page */
       }
 
       /* ========================================================
@@ -3119,16 +2861,9 @@
         #services {
           padding-bottom: 32px !important;
         }
-        #payment {
-          padding-top: 32px !important;
-          padding-bottom: 32px !important;
-        }
         #contact {
           padding-top: 32px !important;
-        }
-        .payment-methods-grid {
-          grid-template-columns: repeat(2, 1fr) !important;
-          gap: 16px !important;
+          padding-bottom: 80px !important;
         }
         #contact .section-title-large {
           font-size: 44px !important;
@@ -3141,16 +2876,9 @@
         #services {
           padding-bottom: 40px !important;
         }
-        #payment {
-          padding-top: 40px !important;
-          padding-bottom: 40px !important;
-        }
         #contact {
           padding-top: 40px !important;
-        }
-        .payment-methods-grid {
-          grid-template-columns: repeat(4, 1fr) !important;
-          gap: 20px !important;
+          padding-bottom: 80px !important;
         }
         #contact .section-title-large {
           font-size: 56px !important;
@@ -3159,81 +2887,15 @@
       }
 
       /* ========================================================
-         CONTACT & PAYMENT SECTION: PHONES (max-width: 699px)
+         CONTACT SECTION: PHONES (max-width: 699px)
          ======================================================== */
       @media (max-width: 699px) {
         #services {
           padding-bottom: 20px !important;
         }
-        #payment {
-          padding-top: 20px !important;
-          padding-bottom: 20px !important;
-        }
         #contact {
           padding-top: 20px !important;
           padding-bottom: 80px !important; /* safe clearance for fixed footer dock */
-        }
-
-        #payment .payment-container {
-          padding: 0 16px !important;
-        }
-        .payment-heading {
-          font-size: 30px !important;
-          line-height: 1.15 !important;
-        }
-        .payment-intro {
-          font-size: 14px !important;
-          line-height: 1.5 !important;
-          margin-bottom: 20px !important;
-        }
-        .payment-notice-card {
-          padding: 18px 16px !important;
-          border-radius: 18px !important;
-          margin-bottom: 18px !important;
-        }
-        .payment-steps-list {
-          grid-template-columns: 1fr !important;
-          gap: 10px !important;
-        }
-        .payment-step-item {
-          font-size: 12.5px !important;
-        }
-        .payment-notice-note {
-          font-size: 11.5px !important;
-          margin-top: 14px !important;
-          padding-top: 12px !important;
-        }
-        .payment-methods-grid {
-          grid-template-columns: repeat(2, 1fr) !important;
-          gap: 12px !important;
-        }
-        .payment-method-card {
-          padding: 16px 12px !important;
-          border-radius: 18px !important;
-        }
-        .method-badge-pill {
-          padding: 4px 10px !important;
-          font-size: 11.5px !important;
-          margin-bottom: 10px !important;
-        }
-        .method-action-label {
-          font-size: 10.5px !important;
-          margin-bottom: 4px !important;
-        }
-        .method-phone-number {
-          font-size: 16px !important;
-          margin-bottom: 12px !important;
-        }
-        .method-copy-btn {
-          height: 38px !important;
-          font-size: 12px !important;
-          padding: 0 6px !important;
-        }
-        .payment-whatsapp-btn {
-          height: 48px !important;
-          font-size: 14px !important;
-          margin-top: 18px !important;
-          border-radius: 12px !important;
         }
 
         /* 5. Full width with 16px side padding */
@@ -3446,7 +3108,6 @@
         <a href="#home" class="nav-pill-link active" data-target="home">Home</a>
         <a href="#work" class="nav-pill-link" data-target="work">Work</a>
         <a href="#services" class="nav-pill-link" data-target="services">Services</a>
-        <a href="#payment" class="nav-pill-link" data-target="payment">Pay</a>
         <a href="#contact" class="nav-pill-link" data-target="contact">Contact</a>
       </nav>
 
@@ -3789,132 +3450,6 @@
       </div>
     </section>
 
-    <!-- ========================================================
-         SECTION: PAYMENT (Mobile Wallets)
-         ======================================================== -->
-    <section class="page-section payment-section-wrapper" id="payment">
-      <div class="shell-container payment-container">
-        <!-- Small label PAYMENT -->
-        <div class="payment-eyebrow">PAYMENT</div>
-        <h2 class="payment-heading">Send Payment</h2>
-        <p class="payment-intro">Choose your preferred mobile wallet and send money in under a minute.</p>
-
-        <!-- Notice card: How to pay -->
-        <div class="payment-notice-card">
-          <div class="payment-notice-header">
-            <svg class="payment-info-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="12" cy="12" r="10"></circle>
-              <line x1="12" y1="16" x2="12" y2="12"></line>
-              <line x1="12" y1="8" x2="12.01" y2="8"></line>
-            </svg>
-            <h3 class="payment-notice-title">How to pay</h3>
-          </div>
-          <ol class="payment-steps-list">
-            <li class="payment-step-item">
-              <span class="step-badge">1</span>
-              <span class="step-text">Choose a payment method below and copy the number.</span>
-            </li>
-            <li class="payment-step-item">
-              <span class="step-badge">2</span>
-              <span class="step-text">Open your app and select &ldquo;Send Money&rdquo;.</span>
-            </li>
-            <li class="payment-step-item">
-              <span class="step-badge">3</span>
-              <span class="step-text">Paste the number, enter the agreed amount and confirm.</span>
-            </li>
-            <li class="payment-step-item">
-              <span class="step-badge">4</span>
-              <span class="step-text">Tap &ldquo;Confirm on WhatsApp&rdquo; and send me your Transaction ID (TrxID) or a screenshot.</span>
-            </li>
-          </ol>
-          <div class="payment-notice-note">
-            Please use Send Money (not Cash Out or Payment). Payments are confirmed after verification.
-          </div>
-        </div>
-
-        <!-- 4 method cards in a grid -->
-        <div class="payment-methods-grid">
-          <!-- bKash -->
-          <div class="payment-method-card" data-method="bKash" style="--brand-color: #E2136E; --brand-glow: rgba(226, 19, 110, 0.35);">
-            <div>
-              <div class="method-badge-pill" style="background-color: #E2136E;">bKash</div>
-              <div class="method-action-label">Send Money</div>
-              <div class="method-phone-number">01729512943</div>
-            </div>
-            <button type="button" class="method-copy-btn" data-copy="01729512943" aria-label="Copy bKash number">
-              <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-              </svg>
-              <span class="btn-text">Copy Number</span>
-            </button>
-          </div>
-
-          <!-- Nagad -->
-          <div class="payment-method-card" data-method="Nagad" style="--brand-color: #F6921E; --brand-glow: rgba(246, 146, 30, 0.35);">
-            <div>
-              <div class="method-badge-pill" style="background-color: #F6921E;">Nagad</div>
-              <div class="method-action-label">Send Money</div>
-              <div class="method-phone-number">01729512943</div>
-            </div>
-            <button type="button" class="method-copy-btn" data-copy="01729512943" aria-label="Copy Nagad number">
-              <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-              </svg>
-              <span class="btn-text">Copy Number</span>
-            </button>
-          </div>
-
-          <!-- Rocket -->
-          <div class="payment-method-card" data-method="Rocket" style="--brand-color: #8C3494; --brand-glow: rgba(140, 52, 148, 0.35);">
-            <div>
-              <div class="method-badge-pill" style="background-color: #8C3494;">Rocket</div>
-              <div class="method-action-label">Send Money</div>
-              <div class="method-phone-number">01729512943</div>
-            </div>
-            <button type="button" class="method-copy-btn" data-copy="01729512943" aria-label="Copy Rocket number">
-              <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-              </svg>
-              <span class="btn-text">Copy Number</span>
-            </button>
-          </div>
-
-          <!-- Upay -->
-          <div class="payment-method-card" data-method="Upay" style="--brand-color: #1B3F94; --brand-glow: rgba(27, 63, 148, 0.35);">
-            <div>
-              <div class="method-badge-pill" style="background-color: #1B3F94;">Upay</div>
-              <div class="method-action-label">Send Money</div>
-              <div class="method-phone-number">01729512943</div>
-            </div>
-            <button type="button" class="method-copy-btn" data-copy="01729512943" aria-label="Copy Upay number">
-              <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-              </svg>
-              <span class="btn-text">Copy Number</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Full-width primary button Confirm on WhatsApp -->
-        <a
-          href="https://wa.me/8801729512943?text=Hi%20Yasin%2C%20I%20have%20sent%20the%20payment.%20Method%3A%20%0AAmount%3A%20%0ATransaction%20ID%3A%20"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="payment-whatsapp-btn"
-          aria-label="Confirm payment on WhatsApp"
-        >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="#0b0b0b" aria-hidden="true" style="flex-shrink:0;">
-            <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67M9.11 7.44C8.95 7.44 8.68 7.5 8.46 7.74C8.24 7.97 7.63 8.55 7.63 9.71C7.63 10.87 8.48 11.98 8.6 12.14C8.72 12.3 10.27 14.69 12.63 15.71C13.2 15.95 13.63 16.1 13.98 16.21C14.54 16.39 15.06 16.36 15.46 16.3C15.91 16.24 16.84 15.74 17.03 15.2C17.23 14.67 17.23 14.21 17.17 14.11C17.11 14.01 16.95 13.96 16.71 13.84C16.48 13.72 15.31 13.15 15.09 13.07C14.88 12.99 14.72 12.95 14.56 13.19C14.4 13.43 13.94 13.96 13.8 14.12C13.66 14.28 13.52 14.3 13.29 14.18C13.05 14.06 12.3 13.82 11.41 13.03C10.72 12.41 10.25 11.66 10.12 11.42C9.99 11.18 10.11 11.06 10.23 10.94C10.33 10.84 10.46 10.67 10.58 10.53C10.7 10.39 10.74 10.29 10.82 10.13C10.9 9.97 10.86 9.83 10.8 9.71C10.74 9.59 10.28 8.46 10.08 7.99C9.9 7.53 9.7 7.59 9.56 7.58C9.42 7.58 9.26 7.57 9.11 7.57"></path>
-          </svg>
-          <span>Confirm on WhatsApp</span>
-          <span class="arrow-glyph">↗</span>
-        </a>
-      </div>
-    </section>
 
     <!-- ========================================================
          SECTION 04: CONTACT (Full Viewport)
@@ -4894,49 +4429,6 @@
             }
           });
         }
-
-        // --- 9B. PAYMENT WALLET NUMBER COPY ---
-        const walletCopyButtons = document.querySelectorAll('.method-copy-btn');
-        walletCopyButtons.forEach(btn => {
-          let timer = null;
-          btn.addEventListener('click', async () => {
-            const rawNumber = btn.getAttribute('data-copy') || '01729512943';
-            try {
-              if (navigator.clipboard && navigator.clipboard.writeText) {
-                await navigator.clipboard.writeText(rawNumber);
-              } else {
-                const textArea = document.createElement('textarea');
-                textArea.value = rawNumber;
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textArea);
-              }
-            } catch (err) {
-              console.error('Wallet copy failed:', err);
-            }
-
-            if (timer) clearTimeout(timer);
-            btn.classList.add('copied');
-            btn.innerHTML = `
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              <span class="btn-text">Copied</span>
-            `;
-
-            timer = setTimeout(() => {
-              btn.classList.remove('copied');
-              btn.innerHTML = `
-                <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                </svg>
-                <span class="btn-text">Copy Number</span>
-              `;
-            }, 2000);
-          });
-        });
 
         // --- 10. INQUIRY FORM SUBMISSION (Hardened Validation, Inline Errors & Anti-Bot) ---
         const contactFormElement = document.getElementById('contactFormElement');
