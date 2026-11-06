@@ -4708,13 +4708,23 @@
           }
         }
 
-        function showFormError() {
+        function showFormError(detailMessage) {
           if (!formSuccessToast) return;
           formSuccessToast.style.display = 'block';
           formSuccessToast.style.borderColor = 'rgba(239, 68, 68, 0.35)';
           formSuccessToast.style.color = '#ef4444';
           formSuccessToast.style.background = 'rgba(239, 68, 68, 0.1)';
-          formSuccessToast.innerHTML = 'Something went wrong. Please message me on <a href="https://wa.me/8801729512943" target="_blank" rel="noopener noreferrer" style="color: #ffffff; text-decoration: underline; font-weight: 600;">WhatsApp</a> instead.';
+
+          let detailHtml = '';
+          if (detailMessage) {
+            const sanitized = String(detailMessage)
+              .replace(/&/g, '&amp;')
+              .replace(/</g, '&lt;')
+              .replace(/>/g, '&gt;');
+            detailHtml = `<div style="margin-top: 8px; font-size: 11px; color: #fca5a5; font-family: monospace; word-break: break-all; line-height: 1.4;">${sanitized}</div>`;
+          }
+
+          formSuccessToast.innerHTML = `Something went wrong. Please message me on <a href="https://wa.me/8801729512943" target="_blank" rel="noopener noreferrer" style="color: #ffffff; text-decoration: underline; font-weight: 600;">WhatsApp</a> instead.${detailHtml}`;
         }
 
         function clearFieldError(inputEl, errorEl) {
@@ -4818,16 +4828,28 @@
               setSubmitButtonState(submitBtn, 'Sending...', null);
             }
 
+            // Trim URL and Key, ensure proper /rest/v1/leads endpoint
+            const cleanUrl = (typeof SUPABASE_URL === 'string' ? SUPABASE_URL : '').trim().replace(/\/+$/, '');
+            const baseUrl = cleanUrl.endsWith('/rest/v1') ? cleanUrl : `${cleanUrl}/rest/v1`;
+            const endpoint = `${baseUrl}/leads`;
+
+            const cleanKey = (typeof SUPABASE_KEY === 'string' ? SUPABASE_KEY : '').trim();
+
+            const headers = {
+              'Content-Type': 'application/json',
+              'Prefer': 'return=minimal',
+              'apikey': cleanKey
+            };
+
+            if (cleanKey.startsWith('eyJ')) {
+              headers['Authorization'] = `Bearer ${cleanKey}`;
+            }
+
+            let response;
             try {
-              const endpoint = `${SUPABASE_URL.replace(/\/+$/, '')}/rest/v1/leads`;
-              const response = await fetch(endpoint, {
+              response = await fetch(endpoint, {
                 method: 'POST',
-                headers: {
-                  'apikey': SUPABASE_KEY,
-                  'Authorization': `Bearer ${SUPABASE_KEY}`,
-                  'Content-Type': 'application/json',
-                  'Prefer': 'return=minimal'
-                },
+                headers: headers,
                 body: JSON.stringify({
                   name: name,
                   email: email,
@@ -4836,27 +4858,42 @@
                   brief: brief
                 })
               });
+            } catch (netErr) {
+              console.error('Fetch network error:', netErr);
+              const errMsg = netErr && netErr.message ? netErr.message : String(netErr);
+              showFormError(`Network error: ${errMsg}`);
 
-              if (response.status === 201) {
-                // Clear the form on HTTP 201 success
-                contactFormElement.reset();
-                clearFieldError(nameInput, nameError);
-                clearFieldError(emailInput, emailError);
-                clearFieldError(briefInput, briefError);
-
-                showFormToast('Thank you! Your request has been sent. I will reply within 24 hours.', false);
-
-                if (submitBtn) {
-                  submitBtn.disabled = false;
-                  submitBtn.style.opacity = '1';
-                  setSubmitButtonState(submitBtn, 'Send Discovery Request', '↗');
-                }
-              } else {
-                throw new Error(`HTTP ${response.status}`);
+              if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.style.opacity = '1';
+                setSubmitButtonState(submitBtn, 'Send Discovery Request', '↗');
               }
-            } catch (err) {
-              console.error('Lead submission failed:', err);
-              showFormError();
+              return;
+            }
+
+            if (response.status === 201) {
+              // Clear the form on HTTP 201 success
+              contactFormElement.reset();
+              clearFieldError(nameInput, nameError);
+              clearFieldError(emailInput, emailError);
+              clearFieldError(briefInput, briefError);
+
+              showFormToast('Thank you! Your request has been sent. I will reply within 24 hours.', false);
+
+              if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.style.opacity = '1';
+                setSubmitButtonState(submitBtn, 'Send Discovery Request', '↗');
+              }
+            } else {
+              let respText = '';
+              try {
+                respText = await response.text();
+              } catch (tErr) {
+                respText = '(could not read response text)';
+              }
+              console.error('Supabase error:', response.status, respText);
+              showFormError(`HTTP ${response.status}: ${respText}`);
 
               if (submitBtn) {
                 submitBtn.disabled = false;
