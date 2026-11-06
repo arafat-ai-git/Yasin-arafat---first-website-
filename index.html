@@ -1532,6 +1532,59 @@
         margin-bottom: 16px;
       }
 
+      /* WhatsApp Contact Card Header */
+      .whatsapp-card-badge-row {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 20px;
+      }
+
+      .whatsapp-icon-badge {
+        width: 52px;
+        height: 52px;
+        min-width: 52px;
+        border-radius: 50%;
+        background-color: #25D366;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        box-shadow: 0 0 16px rgba(37, 211, 102, 0.35);
+      }
+
+      .whatsapp-icon-badge svg {
+        width: 30px;
+        height: 30px;
+        display: block;
+      }
+
+      .whatsapp-text-col {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-width: 0;
+      }
+
+      .whatsapp-chat-title {
+        font-family: 'Archivo', sans-serif;
+        font-variation-settings: 'wdth' 104, 'wght' 600;
+        font-weight: 600;
+        font-size: 24px;
+        letter-spacing: -0.015em;
+        color: #ffffff;
+        line-height: 1.15;
+        margin: 0;
+      }
+
+      .whatsapp-chat-subtitle {
+        font-size: 14px;
+        color: #8e8e8e;
+        line-height: 1.4;
+        margin-top: 4px;
+        margin-bottom: 0;
+      }
+
       .email-action-row,
       .whatsapp-action-row {
         display: flex;
@@ -3167,22 +3220,22 @@
           padding-bottom: 24px !important;
         }
 
-        /* Top navigation: links 14px, logo 14px */
+        /* Top navigation: links 15px, logo 15px */
         .top-nav-bar {
           padding: 0 24px !important;
           height: 76px !important;
           box-sizing: border-box !important;
         }
         .top-nav-bar .nav-brand-title {
-          font-size: 14px !important;
+          font-size: 15px !important;
         }
         .top-nav-bar .nav-pill-link {
-          font-size: 14px !important;
-          padding: 0 12px !important;
+          font-size: 15px !important;
+          padding: 0 14px !important;
         }
         .top-nav-bar .nav-hire-btn {
-          font-size: 14px !important;
-          padding: 0 18px !important;
+          font-size: 15px !important;
+          padding: 0 20px !important;
         }
 
         /* Hero: layout safety & dimensions */
@@ -3194,7 +3247,7 @@
         }
         .hero-3col-layout {
           display: grid !important;
-          grid-template-columns: 300px 1fr 240px !important;
+          grid-template-columns: minmax(280px, 320px) 1fr minmax(220px, 260px) !important;
           gap: 0 !important;
           align-items: center !important;
           width: 100% !important;
@@ -3203,15 +3256,15 @@
           min-height: calc(100svh - 76px) !important;
         }
         .hero-left-column {
-          width: 300px !important;
-          max-width: 300px !important;
+          width: 100% !important;
+          max-width: 320px !important;
           grid-column: 1 !important;
           z-index: 10 !important;
           align-items: flex-start !important;
         }
         .hero-right-column {
-          width: 240px !important;
-          max-width: 240px !important;
+          width: 100% !important;
+          max-width: 260px !important;
           grid-column: 3 !important;
           z-index: 10 !important;
           align-items: flex-end !important;
@@ -3237,54 +3290,54 @@
           display: block !important;
         }
 
-        /* Hero typography */
+        /* Hero typography: intro text 18px, AI CREATOR label 13px */
         .hero-intro-copy {
-          font-size: 16px !important;
-          line-height: 1.55 !important;
+          font-size: 18px !important;
+          line-height: 1.6 !important;
         }
         .hero-creator-badge {
-          font-size: 12px !important;
+          font-size: 13px !important;
         }
         .hero-stats-panel {
           width: 100% !important;
-          max-width: 300px !important;
+          max-width: 320px !important;
           height: auto !important;
           min-height: auto !important;
           box-sizing: border-box !important;
         }
         .hero-stats-panel .stat-val {
-          font-size: 22px !important;
+          font-size: 24px !important;
         }
         .hero-stats-panel .stat-desc {
-          font-size: 11px !important;
+          font-size: 12px !important;
         }
 
-        /* Core Capabilities box: title 11px, items 14px */
+        /* Core Capabilities box: title 12px, items 15px */
         .services-mini-card {
-          width: 240px !important;
-          max-width: 240px !important;
+          width: 100% !important;
+          max-width: 260px !important;
           padding: 18px 16px !important;
           height: auto !important;
           min-height: auto !important;
           box-sizing: border-box !important;
         }
         .mini-card-head {
-          font-size: 11px !important;
+          font-size: 12px !important;
         }
         .mini-service-item {
-          font-size: 14px !important;
+          font-size: 15px !important;
         }
         .mini-service-item .num {
-          font-size: 11px !important;
+          font-size: 12px !important;
         }
 
-        /* Hero badges: Available 13px, Visitor 12px */
+        /* Hero badges: Available for new projects 13px, VISITORS 13px */
         .hero-avail-badge {
           font-size: 13px !important;
           height: auto !important;
         }
         .hero-visitor-badge {
-          font-size: 12px !important;
+          font-size: 13px !important;
           position: absolute !important;
           top: 16px !important;
           right: 24px !important;
@@ -3293,60 +3346,72 @@
           height: auto !important;
         }
         .hero-visitor-badge .visitor-label {
-          font-size: 12px !important;
+          font-size: 13px !important;
         }
         .hero-visitor-badge .visitor-count-num {
-          font-size: 12px !important;
+          font-size: 13px !important;
         }
 
-        /* Section headings: 40px */
+        /* Book A Call & CTA buttons */
+        .hero-bottom-cta {
+          margin: 16px auto 0 !important;
+          z-index: 10 !important;
+        }
+        .hero-bottom-cta .cta-btn {
+          font-size: 16px !important;
+          height: 48px !important;
+          padding: 0 28px !important;
+          white-space: nowrap !important;
+        }
+
+        /* Section headings: 44px */
         .section-title-large,
         #work .section-title-large,
         #services .section-title-large,
         #contact .section-title-large {
-          font-size: 40px !important;
-          line-height: 1.1 !important;
+          font-size: 44px !important;
+          line-height: 1.08 !important;
           letter-spacing: -0.03em !important;
         }
 
-        /* Section intro paragraphs: 17px, line-height 1.6 */
+        /* ALL section intro paragraphs and descriptions 18px, line-height 1.65 */
         .section-subtitle-text,
         #work .section-subtitle-text,
         #services .section-subtitle-text {
-          font-size: 17px !important;
-          line-height: 1.6 !important;
+          font-size: 18px !important;
+          line-height: 1.65 !important;
         }
 
-        /* Work stats: numbers 32px, labels 12px */
+        /* Work stats: numbers 34px, labels 14px */
         .work-kpis-strip {
           height: auto !important;
           min-height: auto !important;
         }
         .work-kpi-num,
         #work .work-kpi-num {
-          font-size: 32px !important;
+          font-size: 34px !important;
         }
         .work-kpi-label,
         #work .work-kpi-label {
-          font-size: 12px !important;
+          font-size: 14px !important;
         }
 
-        /* Work filters & cards: filter 14px, category 12px, title 17px, watch 12px */
+        /* Work filters & cards: filter 15px, category 13px, title 19px, watch 13px, full image / external site 13px */
         .work-filter-pill,
         #work .work-filter-pill {
-          font-size: 14px !important;
+          font-size: 15px !important;
           height: auto !important;
           min-height: auto !important;
         }
         .project-tag-pill,
         .project-type-indicator {
-          font-size: 12px !important;
+          font-size: 13px !important;
         }
         .project-card-title {
-          font-size: 17px !important;
+          font-size: 19px !important;
         }
         .watch-youtube-link {
-          font-size: 12px !important;
+          font-size: 13px !important;
         }
         .projects-grid-container {
           align-items: stretch !important;
@@ -3365,18 +3430,19 @@
           justify-content: space-between !important;
         }
 
-        /* Services cards: number 13px, title 20px, desc 15px, tags 12px */
+        /* Services cards: number 14px, title 22px, description 16.5px, tags 13px */
         .service-card-num {
-          font-size: 13px !important;
+          font-size: 14px !important;
         }
         .service-card-title {
-          font-size: 20px !important;
+          font-size: 22px !important;
         }
         .service-card-desc {
-          font-size: 15px !important;
+          font-size: 16.5px !important;
+          line-height: 1.55 !important;
         }
         .service-card-tag {
-          font-size: 12px !important;
+          font-size: 13px !important;
         }
         .service-card-tags {
           flex-wrap: wrap !important;
@@ -3392,17 +3458,22 @@
           justify-content: space-between !important;
         }
 
-        /* Contact: paragraph 16px, WhatsApp 26px, labels 14px, inputs 16px, pills 14px, buttons 15px */
+        /* Contact: paragraph 17px, card title 24px, sub text 15px, form labels 15px, inputs 16px, pills 15px, buttons 16px */
         #contact .contact-prompt-copy {
-          font-size: 16px !important;
-          line-height: 1.6 !important;
+          font-size: 17px !important;
+          line-height: 1.65 !important;
         }
-        #contact .whatsapp-value-display {
-          font-size: 26px !important;
+        .whatsapp-chat-title,
+        #contact .whatsapp-chat-title {
+          font-size: 24px !important;
+        }
+        .whatsapp-chat-subtitle,
+        #contact .whatsapp-chat-subtitle {
+          font-size: 15px !important;
         }
         #contact .field-block label,
         #contact .whatsapp-card-eyebrow {
-          font-size: 14px !important;
+          font-size: 15px !important;
         }
         #contact .input-text,
         #contact .input-area {
@@ -3412,17 +3483,22 @@
           flex-wrap: wrap !important;
         }
         #contact .filter-pill {
-          font-size: 14px !important;
+          font-size: 15px !important;
           height: auto !important;
           min-height: 38px !important;
         }
         #contact .btn-submit-inquiry,
         #contact .copy-btn-action,
-        #contact .whatsapp-chat-link {
-          font-size: 15px !important;
+        #contact .whatsapp-chat-link,
+        .cta-btn,
+        .hero-hire-cta {
+          font-size: 16px !important;
+        }
+        #contact .contact-response-note {
+          font-size: 14px !important;
         }
 
-        /* Footer text: 13px */
+        /* Footer text: 14px */
         .site-footer,
         .footer-row-main,
         .footer-privacy-link,
@@ -3430,7 +3506,7 @@
         .footer-row-sub,
         .footer-motto,
         .dock-label-prefix {
-          font-size: 13px !important;
+          font-size: 14px !important;
         }
       }
 
@@ -3447,22 +3523,22 @@
           padding-bottom: 24px !important;
         }
 
-        /* Top navigation: links 15px, logo 15px */
+        /* Top navigation: links 16px, logo 16px */
         .top-nav-bar {
           padding: 0 48px !important;
           height: 76px !important;
           box-sizing: border-box !important;
         }
         .top-nav-bar .nav-brand-title {
-          font-size: 15px !important;
+          font-size: 16px !important;
         }
         .top-nav-bar .nav-pill-link {
-          font-size: 15px !important;
-          padding: 0 14px !important;
+          font-size: 16px !important;
+          padding: 0 16px !important;
         }
         .top-nav-bar .nav-hire-btn {
-          font-size: 14px !important;
-          padding: 0 22px !important;
+          font-size: 16px !important;
+          padding: 0 24px !important;
         }
 
         /* Hero: layout safety & dimensions */
@@ -3475,7 +3551,7 @@
         }
         .hero-3col-layout {
           display: grid !important;
-          grid-template-columns: 360px 1fr 280px !important;
+          grid-template-columns: minmax(340px, 400px) 1fr minmax(260px, 300px) !important;
           gap: 0 !important;
           align-items: center !important;
           width: 100% !important;
@@ -3484,15 +3560,15 @@
           min-height: calc(100svh - 76px) !important;
         }
         .hero-left-column {
-          width: 360px !important;
-          max-width: 360px !important;
+          width: 100% !important;
+          max-width: 400px !important;
           grid-column: 1 !important;
           z-index: 10 !important;
           align-items: flex-start !important;
         }
         .hero-right-column {
-          width: 280px !important;
-          max-width: 280px !important;
+          width: 100% !important;
+          max-width: 300px !important;
           grid-column: 3 !important;
           z-index: 10 !important;
           align-items: flex-end !important;
@@ -3518,54 +3594,54 @@
           display: block !important;
         }
 
-        /* Hero typography */
+        /* Hero typography: intro text 20px, AI CREATOR label 14px */
         .hero-intro-copy {
-          font-size: 18px !important;
-          line-height: 1.55 !important;
+          font-size: 20px !important;
+          line-height: 1.6 !important;
         }
         .hero-creator-badge {
-          font-size: 13px !important;
+          font-size: 14px !important;
         }
         .hero-stats-panel {
           width: 100% !important;
-          max-width: 360px !important;
+          max-width: 400px !important;
           height: auto !important;
           min-height: auto !important;
           box-sizing: border-box !important;
         }
         .hero-stats-panel .stat-val {
-          font-size: 26px !important;
+          font-size: 28px !important;
         }
         .hero-stats-panel .stat-desc {
-          font-size: 12px !important;
+          font-size: 13px !important;
         }
 
-        /* Core Capabilities box: title 12px, items 15px */
+        /* Core Capabilities box: title 13px, items 16px */
         .services-mini-card {
-          width: 280px !important;
-          max-width: 280px !important;
+          width: 100% !important;
+          max-width: 300px !important;
           padding: 22px !important;
           height: auto !important;
           min-height: auto !important;
           box-sizing: border-box !important;
         }
         .mini-card-head {
-          font-size: 12px !important;
+          font-size: 13px !important;
         }
         .mini-service-item {
-          font-size: 15px !important;
+          font-size: 16px !important;
         }
         .mini-service-item .num {
-          font-size: 12px !important;
+          font-size: 13px !important;
         }
 
-        /* Hero badges: Available 14px, Visitor 13px */
+        /* Hero badges: Available 14px, Visitor 14px */
         .hero-avail-badge {
           font-size: 14px !important;
           height: auto !important;
         }
         .hero-visitor-badge {
-          font-size: 13px !important;
+          font-size: 14px !important;
           position: absolute !important;
           top: 16px !important;
           right: 48px !important;
@@ -3574,60 +3650,72 @@
           height: auto !important;
         }
         .hero-visitor-badge .visitor-label {
-          font-size: 13px !important;
+          font-size: 14px !important;
         }
         .hero-visitor-badge .visitor-count-num {
-          font-size: 13px !important;
+          font-size: 14px !important;
         }
 
-        /* Section headings: 52px */
+        /* Book A Call & CTA buttons */
+        .hero-bottom-cta {
+          margin: 20px auto 0 !important;
+          z-index: 10 !important;
+        }
+        .hero-bottom-cta .cta-btn {
+          font-size: 17px !important;
+          height: 50px !important;
+          padding: 0 32px !important;
+          white-space: nowrap !important;
+        }
+
+        /* Section headings: 56px */
         .section-title-large,
         #work .section-title-large,
         #services .section-title-large,
         #contact .section-title-large {
-          font-size: 52px !important;
+          font-size: 56px !important;
           line-height: 1.05 !important;
-          letter-spacing: -0.03em !important;
+          letter-spacing: -0.035em !important;
         }
 
-        /* Section intro paragraphs: 18px, line-height 1.6 */
+        /* ALL section intro paragraphs and descriptions 19px, line-height 1.65 */
         .section-subtitle-text,
         #work .section-subtitle-text,
         #services .section-subtitle-text {
-          font-size: 18px !important;
-          line-height: 1.6 !important;
+          font-size: 19px !important;
+          line-height: 1.65 !important;
         }
 
-        /* Work stats: numbers 38px, labels 13px */
+        /* Work stats: numbers 42px, labels 15px */
         .work-kpis-strip {
           height: auto !important;
           min-height: auto !important;
         }
         .work-kpi-num,
         #work .work-kpi-num {
-          font-size: 38px !important;
+          font-size: 42px !important;
         }
         .work-kpi-label,
         #work .work-kpi-label {
-          font-size: 13px !important;
+          font-size: 15px !important;
         }
 
-        /* Work filters & cards: filter 15px, category 12.5px, title 19px, watch 12.5px */
+        /* Work filters & cards: filter 16px, category 14px, title 21px, watch 14px, full image / external site 14px */
         .work-filter-pill,
         #work .work-filter-pill {
-          font-size: 15px !important;
+          font-size: 16px !important;
           height: auto !important;
           min-height: auto !important;
         }
         .project-tag-pill,
         .project-type-indicator {
-          font-size: 12.5px !important;
+          font-size: 14px !important;
         }
         .project-card-title {
-          font-size: 19px !important;
+          font-size: 21px !important;
         }
         .watch-youtube-link {
-          font-size: 12.5px !important;
+          font-size: 14px !important;
         }
         .projects-grid-container {
           align-items: stretch !important;
@@ -3646,18 +3734,19 @@
           justify-content: space-between !important;
         }
 
-        /* Services cards: number 14px, title 22px, desc 16px, tags 13px */
+        /* Services cards: number 15px, title 24px, description 17.5px, tags 14px */
         .service-card-num {
-          font-size: 14px !important;
+          font-size: 15px !important;
         }
         .service-card-title {
-          font-size: 22px !important;
+          font-size: 24px !important;
         }
         .service-card-desc {
-          font-size: 16px !important;
+          font-size: 17.5px !important;
+          line-height: 1.55 !important;
         }
         .service-card-tag {
-          font-size: 13px !important;
+          font-size: 14px !important;
         }
         .service-card-tags {
           flex-wrap: wrap !important;
@@ -3673,37 +3762,47 @@
           justify-content: space-between !important;
         }
 
-        /* Contact: paragraph 17px, WhatsApp 30px, labels 15px, inputs 16px, pills 15px, buttons 16px */
+        /* Contact: paragraph 18px, card title 28px, sub text 16px, form labels 16px, inputs 17px, pills 16px, buttons 17px */
         #contact .contact-prompt-copy {
-          font-size: 17px !important;
-          line-height: 1.6 !important;
+          font-size: 18px !important;
+          line-height: 1.65 !important;
         }
-        #contact .whatsapp-value-display {
-          font-size: 30px !important;
+        .whatsapp-chat-title,
+        #contact .whatsapp-chat-title {
+          font-size: 28px !important;
+        }
+        .whatsapp-chat-subtitle,
+        #contact .whatsapp-chat-subtitle {
+          font-size: 16px !important;
         }
         #contact .field-block label,
         #contact .whatsapp-card-eyebrow {
-          font-size: 15px !important;
+          font-size: 16px !important;
         }
         #contact .input-text,
         #contact .input-area {
-          font-size: 16px !important;
+          font-size: 17px !important;
         }
         #contact .pills-flow {
           flex-wrap: wrap !important;
         }
         #contact .filter-pill {
-          font-size: 15px !important;
+          font-size: 16px !important;
           height: auto !important;
           min-height: 40px !important;
         }
         #contact .btn-submit-inquiry,
         #contact .copy-btn-action,
-        #contact .whatsapp-chat-link {
-          font-size: 16px !important;
+        #contact .whatsapp-chat-link,
+        .cta-btn,
+        .hero-hire-cta {
+          font-size: 17px !important;
+        }
+        #contact .contact-response-note {
+          font-size: 15px !important;
         }
 
-        /* Footer text: 14px */
+        /* Footer text: 15px */
         .site-footer,
         .footer-row-main,
         .footer-privacy-link,
@@ -3711,7 +3810,7 @@
         .footer-row-sub,
         .footer-motto,
         .dock-label-prefix {
-          font-size: 14px !important;
+          font-size: 15px !important;
         }
       }
 
@@ -3799,21 +3898,31 @@
           margin: 0 !important;
         }
 
-        #contact .whatsapp-card-eyebrow {
-          font-size: 11px !important;
-          font-weight: 600 !important;
-          letter-spacing: 0.1em !important;
-          color: #8a8a8a !important;
-          text-transform: uppercase !important;
-          margin-bottom: 0 !important;
+        #contact .whatsapp-card-badge-row {
+          gap: 12px !important;
+          margin-bottom: 16px !important;
         }
 
-        #contact .whatsapp-value-display {
-          font-size: 22px !important;
-          font-weight: 600 !important;
-          line-height: 1.1 !important;
-          color: #ffffff !important;
-          margin: 6px 0 14px !important;
+        #contact .whatsapp-icon-badge {
+          width: 44px !important;
+          height: 44px !important;
+          min-width: 44px !important;
+        }
+
+        #contact .whatsapp-icon-badge svg {
+          width: 25px !important;
+          height: 25px !important;
+        }
+
+        #contact .whatsapp-chat-title {
+          font-size: 20px !important;
+          line-height: 1.2 !important;
+        }
+
+        #contact .whatsapp-chat-subtitle {
+          font-size: 13px !important;
+          line-height: 1.35 !important;
+          margin-top: 2px !important;
         }
 
         #contact .whatsapp-action-row {
@@ -4491,8 +4600,17 @@
 
             <!-- Direct WhatsApp Card -->
             <div class="direct-whatsapp-card">
-              <div class="whatsapp-card-eyebrow">WHATSAPP</div>
-              <div class="whatsapp-value-display" id="displayWhatsappNumber">+880 1729-512943</div>
+              <div class="whatsapp-card-badge-row">
+                <div class="whatsapp-icon-badge" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" role="img" focusable="false" aria-hidden="true">
+                    <path fill="#ffffff" fill-rule="evenodd" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2zM9.11 7.44C8.95 7.44 8.68 7.5 8.46 7.74C8.24 7.97 7.63 8.55 7.63 9.71C7.63 10.87 8.48 11.98 8.6 12.14C8.72 12.3 10.27 14.69 12.63 15.71C13.2 15.95 13.63 16.1 13.98 16.21C14.54 16.39 15.06 16.36 15.46 16.3C15.91 16.24 16.84 15.74 17.03 15.2C17.23 14.67 17.23 14.21 17.17 14.11C17.11 14.01 16.95 13.96 16.71 13.84C16.48 13.72 15.31 13.15 15.09 13.07C14.88 12.99 14.72 12.95 14.56 13.19C14.4 13.43 13.94 13.96 13.8 14.12C13.66 14.28 13.52 14.3 13.29 14.18C13.05 14.06 12.3 13.82 11.41 13.03C10.72 12.41 10.25 11.66 10.12 11.42C9.99 11.18 10.11 11.06 10.23 10.94C10.33 10.84 10.46 10.67 10.58 10.53C10.7 10.39 10.74 10.29 10.82 10.13C10.9 9.97 10.86 9.83 10.8 9.71C10.74 9.59 10.28 8.46 10.08 7.99C9.9 7.53 9.7 7.59 9.56 7.58C9.42 7.58 9.26 7.57 9.11 7.57z" />
+                  </svg>
+                </div>
+                <div class="whatsapp-text-col">
+                  <div class="whatsapp-chat-title">Chat on WhatsApp</div>
+                  <div class="whatsapp-chat-subtitle">Quick replies, usually within 24 hours</div>
+                </div>
+              </div>
               <div class="whatsapp-action-row">
                 <button class="copy-btn-action" id="btnCopyWhatsapp" aria-label="Copy WhatsApp number to clipboard">
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -5304,7 +5422,8 @@
         // --- 3. NAV PILL POSITIONING & ACTIVE STATE ---
         const navPillSlider = document.getElementById('navPillSlider');
         const navPillLinks = Array.from(document.querySelectorAll('.nav-pill-link'));
-        const pageSections = Array.from(document.querySelectorAll('.page-section'));
+        const sectionIds = ['home', 'work', 'services', 'contact'];
+        const pageSections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
 
         function setSliderPosition(targetLink) {
           if (!targetLink || !navPillSlider) return;
@@ -5320,7 +5439,10 @@
         let currentActiveSectionId = 'home';
 
         function updateActiveNav(sectionId, force = false) {
-          if (!force && currentActiveSectionId === sectionId) return;
+          if (!force && currentActiveSectionId === sectionId) {
+            refreshActiveSlider();
+            return;
+          }
           currentActiveSectionId = sectionId;
 
           navPillLinks.forEach(link => {
@@ -5358,32 +5480,38 @@
           if (Date.now() < scrollSpyLockUntil) return;
           if (!pageSections.length) return;
 
-          const scrollY = window.pageYOffset || document.documentElement.scrollTop;
-          const windowHeight = window.innerHeight;
-          const scrollHeight = document.documentElement.scrollHeight;
+          const scrollY = window.scrollY !== undefined ? window.scrollY : (window.pageYOffset || document.documentElement.scrollTop || 0);
+          const bodyHeight = (document.body && document.body.scrollHeight) ? document.body.scrollHeight : document.documentElement.scrollHeight;
 
-          // If scrolled to the very bottom of the page, activate the last section (contact)
-          if (windowHeight + scrollY >= scrollHeight - 4) {
-            const lastSec = pageSections[pageSections.length - 1];
-            if (lastSec) updateActiveNav(lastSec.id);
+          // 1. When the page is scrolled to the top (window.scrollY < 120), always set "Home" as the active item.
+          if (scrollY < 120) {
+            updateActiveNav('home');
             return;
           }
 
+          // 3. When the page is scrolled to the very bottom, set "Contact" as active.
+          if (window.innerHeight + scrollY >= bodyHeight - 4) {
+            updateActiveNav('contact');
+            return;
+          }
+
+          // 2. Otherwise, choose active section using reference line: header height + 40% of viewport height (window.innerHeight * 0.4).
+          // Active section is the last section whose top edge is above that line (rect.top <= referenceLine).
           const topNav = document.getElementById('topNav');
           const headerHeight = topNav ? topNav.offsetHeight : 76;
-          const threshold = headerHeight + windowHeight * 0.35;
+          const referenceLine = headerHeight + (window.innerHeight * 0.4);
 
-          let matchedId = pageSections[0].id;
+          let activeId = 'home';
           for (let i = 0; i < pageSections.length; i++) {
             const sec = pageSections[i];
             const rect = sec.getBoundingClientRect();
-            if (rect.top <= threshold) {
-              matchedId = sec.id;
+            if (rect.top <= referenceLine) {
+              activeId = sec.id;
             }
           }
 
-          if (matchedId) {
-            updateActiveNav(matchedId);
+          if (activeId) {
+            updateActiveNav(activeId);
           }
         }
 
@@ -5392,6 +5520,9 @@
             spyRafId = requestAnimationFrame(runScrollSpy);
           }
         }
+
+        // Run immediately on script execution
+        runScrollSpy();
 
         window.addEventListener('load', () => {
           refreshActiveSlider();
@@ -5415,8 +5546,11 @@
           link.addEventListener('click', () => {
             const targetId = link.getAttribute('data-target');
             if (targetId) {
-              updateActiveNav(targetId);
+              updateActiveNav(targetId, true);
               scrollSpyLockUntil = Date.now() + 900;
+              setTimeout(() => {
+                runScrollSpy();
+              }, 920);
             }
           });
           link.addEventListener('mouseenter', () => setSliderPosition(link));
@@ -5424,6 +5558,29 @@
             refreshActiveSlider();
           });
         });
+
+        const navBrandTitle = document.querySelector('.nav-brand-title');
+        if (navBrandTitle) {
+          navBrandTitle.addEventListener('click', () => {
+            updateActiveNav('home', true);
+            scrollSpyLockUntil = Date.now() + 900;
+            setTimeout(() => {
+              runScrollSpy();
+            }, 920);
+          });
+        }
+
+        const navHireBtn = document.querySelector('.nav-hire-btn');
+        if (navHireBtn) {
+          navHireBtn.addEventListener('click', () => {
+            updateActiveNav('contact', true);
+            scrollSpyLockUntil = Date.now() + 900;
+            setTimeout(() => {
+              runScrollSpy();
+            }, 920);
+          });
+        }
+
 
         // --- 4B. SERVICE CARD INTERACTION: AI Video Creation -> Work section filter ---
         const serviceCardAiVideo = document.getElementById('serviceCardAiVideo');
@@ -5754,7 +5911,7 @@
               }
 
               if (copyFeedbackTimer) clearTimeout(copyFeedbackTimer);
-              copyFeedbackText.textContent = 'Copied!';
+              copyFeedbackText.textContent = 'Copied';
               if (copyAlertToast) copyAlertToast.classList.add('visible');
 
               copyFeedbackTimer = setTimeout(() => {
@@ -5764,7 +5921,7 @@
             } catch (err) {
               console.error('Copy failed:', err);
               if (copyFeedbackTimer) clearTimeout(copyFeedbackTimer);
-              copyFeedbackText.textContent = 'Copied!';
+              copyFeedbackText.textContent = 'Copied';
               copyFeedbackTimer = setTimeout(() => {
                 copyFeedbackText.textContent = 'Copy Number';
               }, 2000);
